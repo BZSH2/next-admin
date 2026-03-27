@@ -1,47 +1,59 @@
 const { defineConfig } = require("cz-git");
 
 const commitTypes = [
-  { value: "feat", name: "feat:     \u65b0\u529f\u80fd", emoji: ":sparkles:" },
-  { value: "fix", name: "fix:      \u4fee\u590d\u7f3a\u9677", emoji: ":bug:" },
+  {
+    value: "feat",
+    name: "feat:     \u2728 \u65b0\u529f\u80fd",
+    emoji: ":sparkles:",
+  },
+  {
+    value: "fix",
+    name: "fix:      \ud83d\udc1b \u4fee\u590d\u7f3a\u9677",
+    emoji: ":bug:",
+  },
   {
     value: "docs",
-    name: "docs:     \u6587\u6863\u53d8\u66f4",
+    name: "docs:     \ud83d\udcdd \u6587\u6863\u53d8\u66f4",
     emoji: ":memo:",
   },
   {
     value: "style",
-    name: "style:    \u4ee3\u7801\u683c\u5f0f\u8c03\u6574\uff0c\u4e0d\u5f71\u54cd\u903b\u8f91",
+    name: "style:    \ud83d\udc84 \u4ee3\u7801\u683c\u5f0f\u8c03\u6574\uff0c\u4e0d\u5f71\u54cd\u903b\u8f91",
     emoji: ":lipstick:",
   },
   {
     value: "refactor",
-    name: "refactor: \u4ee3\u7801\u91cd\u6784\uff0c\u4e0d\u65b0\u589e\u529f\u80fd\u4e5f\u4e0d\u4fee\u590d\u7f3a\u9677",
+    name: "refactor: \ud83d\udd04 \u4ee3\u7801\u91cd\u6784\uff0c\u4e0d\u65b0\u589e\u529f\u80fd\u4e5f\u4e0d\u4fee\u590d\u7f3a\u9677",
     emoji: ":recycle:",
   },
-  { value: "perf", name: "perf:     \u6027\u80fd\u4f18\u5316", emoji: ":zap:" },
+  {
+    value: "perf",
+    name: "perf:     \u26a1 \u6027\u80fd\u4f18\u5316",
+    emoji: ":zap:",
+  },
   {
     value: "test",
-    name: "test:     \u6d4b\u8bd5\u76f8\u5173",
+    name: "test:     \u2705 \u6d4b\u8bd5\u76f8\u5173",
     emoji: ":white_check_mark:",
   },
   {
     value: "build",
-    name: "build:    \u6784\u5efa\u6d41\u7a0b\u6216\u4f9d\u8d56\u8c03\u6574",
+    name: "build:    \ud83d\udce6 \u6784\u5efa\u6d41\u7a0b\u6216\u4f9d\u8d56\u8c03\u6574",
     emoji: ":package:",
   },
   {
     value: "ci",
-    name: "ci:       CI \u914d\u7f6e\u6216\u811a\u672c\u53d8\u66f4",
+    name: "ci:       \ud83c\udfa1 CI \u914d\u7f6e\u6216\u811a\u672c\u53d8\u66f4",
     emoji: ":ferris_wheel:",
   },
   {
     value: "chore",
-    name: "chore:    \u6742\u9879\u7ef4\u62a4",
+    name: "chore:    \ud83d\udd28 \u6742\u9879\u7ef4\u62a4",
     emoji: ":hammer:",
   },
   {
     value: "revert",
-    name: "revert:   \u56de\u6eda\u63d0\u4ea4",
+    name: "revert:   \u23ea \u56de\u6eda\u63d0\u4ea4",
     emoji: ":rewind:",
   },
 ];

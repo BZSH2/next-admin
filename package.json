@@ -5,20 +5,27 @@
   "packageManager": "pnpm@10.10.0",
   "scripts": {
     "commit": "git-cz",
-    "cz": "git-cz",
+    "cz": "git add . && git-cz",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "pnpm lint:eslint && pnpm lint:style",
-    "lint:fix": "pnpm lint:eslint:fix && pnpm lint:style:fix",
+    "analyze:uncss": "node scripts/run-uncss.cjs",
+    "check": "pnpm check:lint && pnpm check:format",
+    "check:eslint": "pnpm lint:eslint",
+    "check:format": "pnpm format:check",
+    "check:lint": "pnpm check:eslint && pnpm check:stylelint",
+    "check:stylelint": "pnpm lint:style",
+    "lint": "pnpm check:lint",
+    "lint:fix": "pnpm lint:eslint:fix && pnpm lint:style:fix && pnpm format",
     "lint:eslint": "eslint . --max-warnings=0",
     "lint:eslint:fix": "eslint . --fix",
+    "lint:commit": "commitlint --last --verbose",
     "lint:style": "stylelint \"**/*.{css,scss}\" --allow-empty-input",
     "lint:style:fix": "stylelint \"**/*.{css,scss}\" --fix --allow-empty-input",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint:staged": "lint-staged",
-    "prepare": "simple-git-hooks"
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "16.2.1",
@@ -37,22 +44,17 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
     "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "postcss-scss": "^4.0.9",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "simple-git-hooks": "^2.13.1",
     "stylelint": "^17.5.0",
     "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-scss": "^7.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm exec lint-staged",
-    "commit-msg": "pnpm exec commitlint --edit \"$1\""
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-git"
-    }
+    "typescript": "^5",
+    "uncss": "^0.17.3"
   }
 }
