@@ -4,10 +4,14 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "package.json": "pnpm-lock.yaml",
-    "next.config.ts": "next-env.d.ts, postcss.config.mjs, tsconfig.json",
-    "eslint.config.mjs": "stylelint.config.mjs, .commitlintrc.json, cz.config.cjs, .lintstagedrc.mjs",
-    ".prettierrc.mjs": ".prettierignore",
-    "README.md": "*.md"
+    "next.config.ts": "src/types/next-env.d.ts, tsconfig.json, postcss.config.mjs, uno.config.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    ".gitignore": ".gitattributes",
+    ".env": ".env.*",
+    "eslint.config.ts": ".eslintignore.json, .lintstagedrc.mjs, stylelint.config.mjs, commitlint.config.cjs, cz.config.cjs, .czrc, .prettierrc.json, .prettierignore",
+    "Dockerfile": "docker-compose.prod.yml, .dockerignore",
+    "deploy/deploy.sh": "deploy/Caddyfile.next.admin.example",
+    "README.md": "AGENTS.md, CLAUDE.md"
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

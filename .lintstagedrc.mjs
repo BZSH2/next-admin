@@ -11,10 +11,22 @@ const toCliArgs = (filenames) =>
 
 const buildCommand = (baseCommand) => (filenames) =>
   `${baseCommand} ${toCliArgs(filenames)}`;
+const isTypeDeclarationFile = (filename) => filename.endsWith(".d.ts");
+const buildEslintCommand = (filenames) => {
+  const lintableFiles = filenames.filter(
+    (filename) => !isTypeDeclarationFile(filename),
+  );
+
+  if (lintableFiles.length === 0) {
+    return 'echo "No files for ESLint"';
+  }
+
+  return `eslint --fix --max-warnings=0 ${toCliArgs(lintableFiles)}`;
+};
 
 const lintStagedConfig = {
   "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}": [
-    buildCommand("eslint --fix --max-warnings=0"),
+    buildEslintCommand,
     buildCommand("prettier --write"),
   ],
   "*.{css,scss}": [

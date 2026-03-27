@@ -93,6 +93,7 @@ const scopeOptions = [
 module.exports = defineConfig({
   alias: {
     fd: "docs: \u4fee\u6b63\u6587\u6863\u4e2d\u7684\u9519\u522b\u5b57",
+    rc: "chore(config): \u7edf\u4e00\u63d0\u4ea4\u914d\u7f6e\u5e76\u4fee\u590d\u63d0\u4ea4\u6821\u9a8c\u6d41\u7a0b",
   },
   useEmoji: false,
   allowBreakingChanges: ["feat", "fix", "refactor"],

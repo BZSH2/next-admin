@@ -4,7 +4,7 @@
 .husky/_
 build
 coverage
-next-env.d.ts
+src/types/next-env.d.ts
 node_modules
 out
 pnpm-lock.yaml
