@@ -1,4 +1,4 @@
-name: Build and Deploy Next Admin to Aliyun ACR
+name: Build and Deploy Next Admin
 
 on:
   push:
@@ -46,14 +46,13 @@ jobs:
       contents: read
 
     env:
-      IMAGE_REPO: ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ secrets.ALIYUN_REPO }}
-      IMAGE_LATEST: ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ secrets.ALIYUN_REPO }}:prod-latest
-      IMAGE_SHA: ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ secrets.ALIYUN_REPO }}:prod-${{ github.sha }}
+      DEPLOY_IMAGE: next-admin:prod-${{ github.sha }}
       DEPLOY_PATH: ${{ secrets.DEPLOY_PATH || '/opt/next-admin' }}
       CONTAINER_NAME: ${{ secrets.CONTAINER_NAME || 'next-admin' }}
       HOST_PORT: ${{ secrets.HOST_PORT || '25001' }}
       APP_PORT: ${{ secrets.APP_PORT || '3000' }}
       APP_DOMAIN: ${{ secrets.APP_DOMAIN || 'next.admin.bzsh.fun' }}
+      IMAGE_ARCHIVE_NAME: next-admin-image.tar.gz
 
     steps:
       - name: Checkout code
@@ -62,22 +61,13 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to Aliyun ACR
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ secrets.ALIYUN_REGISTRY }}
-          username: ${{ secrets.ALIYUN_USERNAME }}
-          password: ${{ secrets.ALIYUN_PASSWORD }}
+      - name: Build Docker image
+        run: |
+          docker build -t '${{ env.DEPLOY_IMAGE }}' .
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            ${{ env.IMAGE_LATEST }}
-            ${{ env.IMAGE_SHA }}
+      - name: Export Docker image archive
+        run: |
+          docker save '${{ env.DEPLOY_IMAGE }}' | gzip > '${{ env.IMAGE_ARCHIVE_NAME }}'
 
       - name: Prepare SSH key
         run: |
@@ -90,22 +80,24 @@ jobs:
         run: |
           ssh -p '${{ secrets.DEPLOY_PORT }}' '${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}' 'mkdir -p ${{ env.DEPLOY_PATH }}'
 
-      - name: Upload deploy files
+      - name: Upload deploy files and image archive
         run: |
-          scp -P '${{ secrets.DEPLOY_PORT }}' docker-compose.prod.yml deploy/deploy.sh '${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ env.DEPLOY_PATH }}/'
+          scp -P '${{ secrets.DEPLOY_PORT }}' \
+            docker-compose.prod.yml \
+            deploy/deploy.sh \
+            '${{ env.IMAGE_ARCHIVE_NAME }}' \
+            '${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ env.DEPLOY_PATH }}/'
 
       - name: Prepare remote deploy env
         run: |
           cat > .deploy.remote.env <<EOF
-          ACR_REGISTRY=${{ secrets.ALIYUN_REGISTRY }}
-          ACR_USERNAME=${{ secrets.ALIYUN_USERNAME }}
-          ACR_PASSWORD=${{ secrets.ALIYUN_PASSWORD }}
-          DEPLOY_IMAGE=${{ env.IMAGE_SHA }}
+          DEPLOY_IMAGE=${{ env.DEPLOY_IMAGE }}
           DEPLOY_PATH=${{ env.DEPLOY_PATH }}
           CONTAINER_NAME=${{ env.CONTAINER_NAME }}
           HOST_PORT=${{ env.HOST_PORT }}
           APP_PORT=${{ env.APP_PORT }}
           APP_DOMAIN=${{ env.APP_DOMAIN }}
+          DEPLOY_IMAGE_ARCHIVE=${{ env.DEPLOY_PATH }}/${{ env.IMAGE_ARCHIVE_NAME }}
           HEALTHCHECK_URL=http://127.0.0.1:${{ env.HOST_PORT }}/api/health
           EOF
           scp -P '${{ secrets.DEPLOY_PORT }}' .deploy.remote.env '${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ env.DEPLOY_PATH }}/.deploy.remote.env'
@@ -124,4 +116,4 @@ jobs:
           "
 
       - name: Deployment complete
-        run: echo "✅ Next Admin image built, pushed, and deployed successfully."
+        run: echo "✅ Next Admin image built locally in Actions and deployed successfully."

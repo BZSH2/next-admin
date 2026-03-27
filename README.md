@@ -11,9 +11,9 @@ pnpm dev
 
 默认启动后访问：<http://localhost:3000>
 
-## 生产部署方案（阿里云）
+## 生产部署方案（阿里云服务器）
 
-项目已接入 **GitHub Actions → 阿里云 ACR → SSH 登录服务器 → Docker Compose 发布** 的自动部署链路。
+项目已接入 **GitHub Actions → 构建 Docker 镜像 → SSH 上传到服务器 → Docker Compose 发布** 的自动部署链路。
 
 当前约定：
 
@@ -25,7 +25,7 @@ pnpm dev
 ### 自动部署触发方式
 
 - 推送到 `master` 分支时自动触发
-- 也支持在 GitHub Actions 页面手动执行 `Build and Deploy Next Admin to Aliyun ACR`
+- 也支持在 GitHub Actions 页面手动执行 `Build and Deploy Next Admin`
 
 ### GitHub Secrets / Environment（prod）
 
@@ -33,11 +33,6 @@ pnpm dev
 
 #### 必填
 
-- `ALIYUN_REGISTRY`：阿里云 ACR Registry 地址
-- `ALIYUN_NAMESPACE`：ACR 命名空间
-- `ALIYUN_REPO`：ACR 仓库名
-- `ALIYUN_USERNAME`：ACR 用户名
-- `ALIYUN_PASSWORD`：ACR 密码
 - `DEPLOY_HOST`：部署服务器 IP / 域名
 - `DEPLOY_PORT`：SSH 端口
 - `DEPLOY_USER`：SSH 用户名
@@ -65,7 +60,7 @@ pnpm dev
 
 - `Dockerfile`：Next.js standalone 生产镜像
 - `docker-compose.prod.yml`：生产环境容器编排
-- `deploy/deploy.sh`：服务器端拉镜像并重启服务
+- `deploy/deploy.sh`：服务器端加载镜像并重启服务
 - `.github/workflows/deploy-aliyun.yml`：GitHub Actions 自动部署工作流
 - `app/api/health/route.ts`：健康检查接口
 
