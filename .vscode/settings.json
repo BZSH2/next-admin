@@ -5,7 +5,7 @@
   "explorer.fileNesting.patterns": {
     "package.json": "pnpm-lock.yaml",
     "next.config.ts": "next-env.d.ts, postcss.config.mjs, tsconfig.json",
-    "eslint.config.mjs": "stylelint.config.mjs, commitlint.config.mjs, cz.config.cjs, .lintstagedrc.mjs",
+    "eslint.config.mjs": "stylelint.config.mjs, .commitlintrc.json, cz.config.cjs, .lintstagedrc.mjs",
     ".prettierrc.mjs": ".prettierignore",
     "README.md": "*.md"
   },
