@@ -7,7 +7,7 @@
     "next.config.ts": "next-env.d.ts, postcss.config.mjs, tsconfig.json",
     "eslint.config.mjs": "stylelint.config.mjs, commitlint.config.mjs, cz.config.cjs, .lintstagedrc.mjs",
     ".prettierrc.mjs": ".prettierignore",
-    "README.md": "AGENTS.md, CLAUDE.md"
+    "README.md": "*.md"
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

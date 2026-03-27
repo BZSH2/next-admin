@@ -1,17 +1,4 @@
-const tailwindAtRules = [
-  "theme",
-  "source",
-  "utility",
-  "variant",
-  "custom-variant",
-  "plugin",
-  "config",
-  "apply",
-  "layer",
-  "reference",
-  "responsive",
-  "screen",
-];
+const utilityAtRules = ["unocss", "apply", "screen"];
 
 const stylelintConfig = {
   extends: ["stylelint-config-standard-scss"],
@@ -27,7 +14,7 @@ const stylelintConfig = {
     {
       files: ["**/*.css"],
       rules: {
-        "at-rule-no-unknown": [true, { ignoreAtRules: tailwindAtRules }],
+        "at-rule-no-unknown": [true, { ignoreAtRules: utilityAtRules }],
         "scss/at-rule-no-unknown": null,
       },
     },
@@ -36,7 +23,7 @@ const stylelintConfig = {
       customSyntax: "postcss-scss",
       rules: {
         "at-rule-no-unknown": null,
-        "scss/at-rule-no-unknown": [true, { ignoreAtRules: tailwindAtRules }],
+        "scss/at-rule-no-unknown": [true, { ignoreAtRules: utilityAtRules }],
       },
     },
   ],

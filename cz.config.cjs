@@ -52,6 +52,26 @@ const commitTypes = [
     emoji: ":hammer:",
   },
   {
+    value: "release",
+    name: "release:  \ud83d\ude80 \u53d1\u5e03\u7248\u672c\u6216\u53d1\u5e03\u6d41\u7a0b",
+    emoji: ":rocket:",
+  },
+  {
+    value: "types",
+    name: "types:    \ud83e\udde0 \u7c7b\u578b\u5b9a\u4e49\u6216\u58f0\u660e\u66f4\u65b0",
+    emoji: ":brain:",
+  },
+  {
+    value: "wip",
+    name: "wip:      \ud83d\udea7 \u5f00\u53d1\u4e2d\u8349\u7a3f\u6216\u9636\u6bb5\u63d0\u4ea4",
+    emoji: ":construction:",
+  },
+  {
+    value: "workflow",
+    name: "workflow: \ud83e\udde9 \u5de5\u4f5c\u6d41\u3001\u81ea\u52a8\u5316\u6216\u534f\u4f5c\u914d\u7f6e",
+    emoji: ":jigsaw:",
+  },
+  {
     value: "revert",
     name: "revert:   \u23ea \u56de\u6eda\u63d0\u4ea4",
     emoji: ":rewind:",
