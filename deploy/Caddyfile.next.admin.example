@@ -1,0 +1,7 @@
+# 将这段加入服务器的 Caddy 配置后 reload Caddy
+# 作用：把 next.admin.bzsh.fun 反代到 next-admin 容器暴露的 25001 端口
+
+next.admin.bzsh.fun {
+  encode gzip zstd
+  reverse_proxy 127.0.0.1:25001
+}

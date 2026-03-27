@@ -1,0 +1,26 @@
+services:
+  app:
+    image: ${DEPLOY_IMAGE:?DEPLOY_IMAGE is required}
+    container_name: ${CONTAINER_NAME:-next-admin}
+    restart: unless-stopped
+    ports:
+      - "${HOST_PORT:-25001}:${APP_PORT:-3000}"
+    environment:
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+      PORT: ${APP_PORT:-3000}
+      APP_DOMAIN: ${APP_DOMAIN:-next.admin.bzsh.fun}
+      NEXT_TELEMETRY_DISABLED: "1"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - |
+          fetch(`http://127.0.0.1:${process.env.PORT || 3000}/api/health`)
+            .then((res) => process.exit(res.ok ? 0 : 1))
+            .catch(() => process.exit(1))
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
