@@ -1,6 +1,6 @@
 const config = {
   plugins: {
-    "@unocss/postcss": {},
+    '@unocss/postcss': {},
   },
 };
 

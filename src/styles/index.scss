@@ -1,0 +1,9 @@
+@import './normalize.css';
+@unocss all;
+
+:root {
+  --background: #fff;
+  --foreground: #171717;
+  --font-sans: var(--font-geist-sans), arial, helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono), 'SFMono-Regular', consolas, monospace;
+}

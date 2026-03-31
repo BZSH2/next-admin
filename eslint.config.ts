@@ -1,26 +1,45 @@
-import { readFileSync } from "node:fs";
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
-import prettier from "eslint-config-prettier/flat";
+import { readFileSync } from 'node:fs';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import prettier from 'eslint-config-prettier/flat';
 
 const eslintIgnorePatterns: string[] = JSON.parse(
-  readFileSync(new URL("./.eslintignore.json", import.meta.url), "utf8"),
+  readFileSync(new URL('./.eslintignore.json', import.meta.url), 'utf8')
 );
 
 const eslintConfig = defineConfig([
   {
     linterOptions: {
-      reportUnusedDisableDirectives: "error",
+      reportUnusedDisableDirectives: 'error',
     },
   },
   ...nextVitals,
   ...nextTs,
   prettier,
   {
-    files: ["*.cjs", "scripts/**/*.cjs"],
+    files: ['*.cjs', 'scripts/**/*.cjs'],
     rules: {
-      "@typescript-eslint/no-require-imports": "off",
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
+    rules: {
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-debugger': 'error',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      'no-redeclare': 'off',
+      '@typescript-eslint/no-redeclare': 'error',
+      'no-shadow': 'off',
+      '@typescript-eslint/no-shadow': 'error',
     },
   },
   globalIgnores(eslintIgnorePatterns),

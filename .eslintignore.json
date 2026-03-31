@@ -5,5 +5,6 @@
   "build/**",
   "coverage/**",
   ".husky/_/**",
-  "src/types/next-env.d.ts"
+  "src/types/next-env.d.ts",
+  ".github/deploy/**"
 ]
