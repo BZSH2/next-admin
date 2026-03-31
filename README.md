@@ -24,3 +24,5 @@ pnpm dev
 - [自定义 SVG 与 Icon 组件实现](./docs/icon-system.md)
 - [菜单元信息与自动生成实现](./docs/menu-generation.md)
 - [部署与发布实现](./docs/deployment.md)
+- [CI 工作流说明](./docs/ci-workflow.md)
+- [Lint 与提交校验说明](./docs/lint-and-git-hooks.md)
