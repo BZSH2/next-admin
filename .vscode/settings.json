@@ -42,6 +42,12 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
+  "typescript.suggest.autoImports": true,
+  "javascript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "prettier.requireConfig": true,
   "eslint.useFlatConfig": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
@@ -61,6 +67,8 @@
     "nosniff",
     "preflights",
     "SAMEORIGIN",
+    "svgr",
+    "turbopack",
     "vercel",
     "webp",
     "zstd"

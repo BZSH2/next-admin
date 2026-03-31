@@ -32,6 +32,22 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   generateEtags: false,
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
   headers: async () => [
     {
       source: '/:path*',
