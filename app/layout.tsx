@@ -26,9 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className="h-full">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} flex h-full flex-col antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} h-full`}>
         <AntdRegistry>{children}</AntdRegistry>
       </body>
     </html>

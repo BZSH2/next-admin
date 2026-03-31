@@ -32,7 +32,7 @@
     "tsconfig.json": "tsconfig.*.json",
     ".gitignore": ".gitattributes",
     ".env": ".env.*",
-    "eslint.config.ts": ".eslintignore.json, .lintstagedrc.mjs, stylelint.config.mjs, commitlint.config.cjs, .commitlintrc.json, cz.config.cjs, .czrc, .prettierrc.json, .prettierignore",
+    "eslint.config.ts": ".eslintignore.json, .lintstagedrc.mjs, stylelint.config.mjs, commitlint.config.cjs, cz.config.cjs, .czrc, .prettierrc.json, .prettierignore, .commitlintrc.json",
     "Dockerfile": "docker-compose.prod.yml, .dockerignore",
     ".github/deploy/deploy.sh": ".github/deploy/Caddyfile.next.admin.example",
     "README.md": "AGENTS.md, CLAUDE.md"
@@ -53,6 +53,7 @@
     "adduser",
     "bzsh",
     "commitlintrc",
+    "esno",
     "HEALTHCHECK",
     "lintable",
     "necolas",

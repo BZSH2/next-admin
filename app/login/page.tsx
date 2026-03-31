@@ -1,6 +1,12 @@
 'use client';
-
 import { useState } from 'react';
+
+import { definePageMeta } from '@/utils/meta';
+
+definePageMeta({
+  title: '登录',
+  hideInMenu: true,
+});
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
