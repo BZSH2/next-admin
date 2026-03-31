@@ -1,4 +1,3 @@
-import React from 'react';
 import { definePageMeta } from '@/utils/meta';
 
 // 使用我们刚刚封装的优雅方案，同时定义业务菜单数据和 Next.js 官方 SEO 数据

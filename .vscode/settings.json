@@ -27,7 +27,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "package.json": "pnpm-lock.yaml, tsconfig.tsbuildinfo, .pnpm-store",
+    "package.json": "pnpm-lock.yaml, tsconfig.tsbuildinfo, .pnpm-store, next-env.d.ts",
     "next.config.ts": "src/types/next-env.d.ts, tsconfig.json, postcss.config.mjs, uno.config.ts",
     "tsconfig.json": "tsconfig.*.json",
     ".gitignore": ".gitattributes",

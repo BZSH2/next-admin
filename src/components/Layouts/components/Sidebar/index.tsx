@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { Layout } from 'antd';
 import Logo from './components/Logo';
 import Menu from './components/Menu';

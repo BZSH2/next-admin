@@ -1,4 +1,3 @@
-import React from 'react';
 import { definePageMeta } from '@/utils/meta';
 
 export const { pageMeta, metadata } = definePageMeta({

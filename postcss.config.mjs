@@ -1,6 +1,8 @@
 const config = {
   plugins: {
-    '@unocss/postcss': {},
+    '@unocss/postcss': {
+      configOrPath: 'uno.config.ts',
+    },
   },
 };
 

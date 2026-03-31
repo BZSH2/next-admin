@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Sidebar from './components/Sidebar/index';
 
 export default function Layouts({ children }: { children: React.ReactNode }) {
