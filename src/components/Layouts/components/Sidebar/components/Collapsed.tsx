@@ -14,9 +14,9 @@ export default function Collapsed({ collapsed, onCollapse }: CollapsedProps) {
       onClick={() => onCollapse(!collapsed)}
       style={{
         fontSize: '16px',
-        width: 64,
-        height: 64,
-        color: 'inherit',
+        width: 40,
+        height: 40,
+        color: '#64748b',
       }}
     />
   );

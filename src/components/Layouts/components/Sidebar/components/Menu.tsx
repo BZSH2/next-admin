@@ -39,7 +39,11 @@ const toMenuItems = (items: MenuItem[]): ItemType<MenuItemType>[] =>
     children: item.children?.length ? toMenuItems(item.children) : undefined,
   }));
 
-export default function Menu() {
+interface MenuPropsExt {
+  onNavigate?: () => void;
+}
+
+export default function Menu({ onNavigate }: MenuPropsExt) {
   const router = useRouter();
   const pathname = usePathname();
   const [openKeys, setOpenKeys] = useState<string[]>([]);
@@ -54,8 +58,9 @@ export default function Menu() {
   const onClick = useCallback<NonNullable<MenuProps['onClick']>>(
     (e) => {
       router.push(String(e.key));
+      onNavigate?.();
     },
-    [router]
+    [router, onNavigate]
   );
 
   const onOpenChange = useCallback<NonNullable<MenuProps['onOpenChange']>>((keys) => {
@@ -64,13 +69,15 @@ export default function Menu() {
 
   return (
     <AntdMenu
-      theme="dark"
+      theme="light"
+      className="border-r-0 bg-white pt-2"
       selectedKeys={selectedKey ? [selectedKey] : []}
       openKeys={openKeys}
       onOpenChange={onOpenChange}
       mode="inline"
       items={items}
       onClick={onClick}
+      inlineIndent={20}
     />
   );
 }

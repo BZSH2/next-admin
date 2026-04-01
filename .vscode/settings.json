@@ -67,6 +67,7 @@
     "nosniff",
     "preflights",
     "SAMEORIGIN",
+    "Sider",
     "svgr",
     "turbopack",
     "vercel",

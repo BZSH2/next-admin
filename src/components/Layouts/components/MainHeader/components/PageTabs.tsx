@@ -57,9 +57,11 @@ export default function PageTabs() {
 
   return (
     <Tabs
+      className="w-full"
       type="editable-card"
       hideAdd
       size="small"
+      tabBarStyle={{ margin: 0 }}
       activeKey={activeKey || pathname}
       items={tabs}
       onChange={onChange}

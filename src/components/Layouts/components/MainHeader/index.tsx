@@ -1,16 +1,31 @@
 'use client';
 
+import { MenuUnfoldOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { useAppSelector } from '@/store/hooks';
 import PageTabs from './components/PageTabs';
+import Actions from './components/Actions';
+import { useLayoutMode } from '../../hooks/useLayoutMode';
 
 export default function MainHeader() {
+  const { isMobile, showMobileSidebar } = useLayoutMode();
+  const collapsed = useAppSelector((s) => s.ui.collapsed);
+  const compactActions = isMobile || collapsed;
+
   return (
-    <header className="sticky top-0 z-20 flex h-16 w-full shrink-0 items-center justify-between border-b border-slate-200 bg-white px-4 shadow-sm">
-      <div className="flex min-w-0 flex-1 pr-4">
-        <PageTabs />
+    <header className="sticky top-0 z-20 flex h-14 w-full shrink-0 items-center justify-between border-b border-slate-200 bg-white px-3">
+      <div className="flex min-w-0 flex-1 items-center gap-2 pr-3">
+        {isMobile && (
+          <Button
+            type="text"
+            icon={<MenuUnfoldOutlined />}
+            onClick={showMobileSidebar}
+            aria-label="打开侧边导航"
+          />
+        )}
+        {!isMobile && <PageTabs />}
       </div>
-      <div className="flex items-center gap-4">
-        <div className="h-8 w-8 rounded-full bg-slate-200" />
-      </div>
+      <Actions compact={compactActions} />
     </header>
   );
 }

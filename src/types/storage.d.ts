@@ -12,8 +12,8 @@ declare global {
     interface Schema {
       /** 主题模式 */
       theme: 'light' | 'dark' | 'system';
-      /** 侧边栏收起状态 */
-      collapsed: boolean;
+      /** 国际化语言 */
+      locale: 'zh-CN' | 'en-US';
     }
 
     /** 所有合法键名 */

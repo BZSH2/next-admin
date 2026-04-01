@@ -1,16 +1,10 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
-import uiReducer, { setCollapsed, setTheme } from './slices/uiSlice';
+import uiReducer, { setLocale, setTheme } from './slices/uiSlice';
 import tabsReducer from './slices/tabsSlice';
+import layoutReducer from './slices/layoutSlice';
 import { setStorage } from '@/utils/storage';
 
 export const listenerMiddleware = createListenerMiddleware();
-
-listenerMiddleware.startListening({
-  actionCreator: setCollapsed,
-  effect: async (action) => {
-    setStorage('collapsed', action.payload, 'local');
-  },
-});
 
 listenerMiddleware.startListening({
   actionCreator: setTheme,
@@ -19,11 +13,19 @@ listenerMiddleware.startListening({
   },
 });
 
+listenerMiddleware.startListening({
+  actionCreator: setLocale,
+  effect: async (action) => {
+    setStorage('locale', action.payload, 'local');
+  },
+});
+
 export const makeStore = () => {
   return configureStore({
     reducer: {
       ui: uiReducer,
       tabs: tabsReducer,
+      layout: layoutReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
