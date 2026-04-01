@@ -12,5 +12,13 @@
   "bracketSameLine": false,
   "htmlWhitespaceSensitivity": "css",
   "proseWrap": "preserve",
-  "quoteProps": "as-needed"
+  "quoteProps": "as-needed",
+  "overrides": [
+    {
+      "files": "src/utils/storage.ts",
+      "options": {
+        "semi": false
+      }
+    }
+  ]
 }

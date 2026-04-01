@@ -3,7 +3,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // 引入全局类型声明文件以获取 PageMeta 和 MenuItem 的定义
-/// <reference path="../../src/types/pageMeta.d.ts" />
 /// <reference path="../../src/types/menu.d.ts" />
 
 const __filename = fileURLToPath(import.meta.url);
