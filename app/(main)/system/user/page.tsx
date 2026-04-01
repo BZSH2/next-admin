@@ -2,7 +2,7 @@ import { definePageMeta } from '@/utils/meta';
 
 export const { pageMeta, metadata } = definePageMeta({
   title: '用户管理',
-  icon: 'UserOutlined',
+  icon: 'menus/hey',
   sort: 1,
   description: '系统账号与用户信息管理',
 });

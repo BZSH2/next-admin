@@ -4,7 +4,7 @@ import { definePageMeta } from '@/utils/meta';
 // 我们通过 redirect 字段告诉系统它的默认跳转行为，同时设定它在菜单里的父级名称和图标
 export const { pageMeta, metadata } = definePageMeta({
   title: '系统管理',
-  icon: 'SettingOutlined',
+  icon: 'menus/serious',
   sort: 99,
   redirect: '/system/user', // 约定：点击系统管理时，默认重定向到用户管理
 });

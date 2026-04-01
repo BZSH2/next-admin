@@ -3,7 +3,7 @@ import { definePageMeta } from '@/utils/meta';
 // 使用我们刚刚封装的优雅方案，同时定义业务菜单数据和 Next.js 官方 SEO 数据
 export const { pageMeta, metadata } = definePageMeta({
   title: '角色管理',
-  icon: 'SafetyCertificateOutlined', // 将会在侧边栏渲染对应的 Antd 图标
+  icon: 'menus/strong',
   sort: 2, // 排序权重
   description: '系统角色与权限分配管理', // 这部分将作为 <meta name="description"> 输出
 });
