@@ -1,28 +1,28 @@
-'use client';
+'use client'
 
-import { Layout } from 'antd';
-import { Drawer } from 'antd';
-import { useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setCollapsed } from '@/store/slices/uiSlice';
-import { useLayoutMode } from '../../hooks/useLayoutMode';
-import Logo from './components/Logo';
-import Menu from './components/Menu';
-import Collapsed from './components/Collapsed';
+import { Layout } from 'antd'
+import { Drawer } from 'antd'
+import { useCallback } from 'react'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { setCollapsed } from '@/store/slices/uiSlice'
+import { useLayoutMode } from '../../hooks/useLayoutMode'
+import Logo from './components/Logo'
+import Menu from './components/Menu'
+import Collapsed from './components/Collapsed'
 
-const { Sider } = Layout;
+const { Sider } = Layout
 
 export default function Sidebar() {
-  const dispatch = useAppDispatch();
-  const collapsed = useAppSelector((s) => s.ui.collapsed);
-  const { isMobile, mobileSidebarOpen, hideMobileSidebar } = useLayoutMode();
-  const onSetCollapsed = useCallback((v: boolean) => dispatch(setCollapsed(v)), [dispatch]);
+  const dispatch = useAppDispatch()
+  const collapsed = useAppSelector((s) => s.ui.collapsed)
+  const { isMobile, mobileSidebarOpen, hideMobileSidebar } = useLayoutMode()
+  const onSetCollapsed = useCallback((v: boolean) => dispatch(setCollapsed(v)), [dispatch])
 
   if (isMobile) {
     return (
       <Drawer
         placement="left"
-        width={220}
+        size={220}
         open={mobileSidebarOpen}
         onClose={hideMobileSidebar}
         styles={{ body: { padding: 0, background: '#ffffff' } }}
@@ -34,7 +34,7 @@ export default function Sidebar() {
           </div>
         </div>
       </Drawer>
-    );
+    )
   }
 
   return (
@@ -57,5 +57,5 @@ export default function Sidebar() {
         </div>
       </div>
     </Sider>
-  );
+  )
 }

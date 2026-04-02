@@ -1,5 +1,5 @@
-import { defineConfig, presetIcons, presetTypography } from 'unocss';
-import presetWind4 from '@unocss/preset-wind4';
+import { defineConfig, presetIcons, presetTypography } from 'unocss'
+import presetWind4 from '@unocss/preset-wind4'
 
 const unoConfig = defineConfig({
   content: {
@@ -50,6 +50,6 @@ const unoConfig = defineConfig({
     presetTypography(),
   ],
   safelist: ['i-carbon-sun', 'i-carbon-moon', 'i-carbon-menu', 'i-carbon-close'],
-});
+})
 
-export default unoConfig;
+export default unoConfig

@@ -1,4 +1,4 @@
-const { defineConfig } = require('cz-git');
+const { defineConfig } = require('cz-git')
 
 const commitTypes = [
   { value: 'test', name: 'test:     ✅ Tests | 测试', emoji: ':white_check_mark:' },
@@ -29,7 +29,7 @@ const commitTypes = [
   },
   { value: 'revert', name: 'revert:   ⏪ Revert | 回退', emoji: ':rewind:' },
   { value: 'build', name: 'build:    📦 Build System | 打包构建', emoji: ':package:' },
-];
+]
 
 module.exports = defineConfig({
   useEmoji: true,
@@ -60,4 +60,4 @@ module.exports = defineConfig({
     footer: '请输入关联的 Issue，例如 #123（可选）：\n',
   },
   types: commitTypes,
-});
+})

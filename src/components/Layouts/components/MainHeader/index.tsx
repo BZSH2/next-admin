@@ -1,16 +1,14 @@
-'use client';
+'use client'
 
-import { MenuUnfoldOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
-import { useAppSelector } from '@/store/hooks';
-import PageTabs from './components/PageTabs';
-import Actions from './components/Actions';
-import { useLayoutMode } from '../../hooks/useLayoutMode';
+import { MenuUnfoldOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
+import PageTabs from './components/PageTabs'
+import Actions from './components/Actions'
+import { useLayoutMode } from '../../hooks/useLayoutMode'
 
 export default function MainHeader() {
-  const { isMobile, showMobileSidebar } = useLayoutMode();
-  const collapsed = useAppSelector((s) => s.ui.collapsed);
-  const compactActions = isMobile || collapsed;
+  const { isMobile, showMobileSidebar } = useLayoutMode()
+  const compactActions = isMobile
 
   return (
     <header className="sticky top-0 z-20 flex h-14 w-full shrink-0 items-center justify-between border-b border-slate-200 bg-white px-3">
@@ -27,5 +25,5 @@ export default function MainHeader() {
       </div>
       <Actions compact={compactActions} />
     </header>
-  );
+  )
 }

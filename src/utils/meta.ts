@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata } from 'next'
 
 /**
  * 页面元数据定义辅助函数
@@ -20,8 +20,8 @@ import type { Metadata } from 'next';
  * ```
  */
 export function definePageMeta(meta: PageMeta): {
-  pageMeta: PageMeta;
-  metadata: Metadata;
+  pageMeta: PageMeta
+  metadata: Metadata
 } {
   // 从传入的混合配置中，剥离出所有官方支持的 Metadata 字段
   // （实际上在运行时，多余的字段传给 Next.js 的 metadata 也不会报错，
@@ -29,5 +29,5 @@ export function definePageMeta(meta: PageMeta): {
   return {
     pageMeta: meta,
     metadata: meta as Metadata,
-  };
+  }
 }

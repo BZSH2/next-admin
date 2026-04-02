@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { SettingOutlined } from '@ant-design/icons';
-import { Button, Drawer, Segmented, Space, Switch, Typography } from 'antd';
-import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { SettingOutlined } from '@ant-design/icons'
+import { Button, Drawer, Segmented, Space, Switch, Typography } from 'antd'
+import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import {
   setCollapsed,
   setLocale,
   setTheme,
   type LocaleType,
   type Theme,
-} from '@/store/slices/uiSlice';
+} from '@/store/slices/uiSlice'
 
 export default function SettingDrawerAction() {
-  const [open, setOpen] = useState(false);
-  const dispatch = useAppDispatch();
-  const { theme, collapsed, locale } = useAppSelector((s) => s.ui);
+  const [open, setOpen] = useState(false)
+  const dispatch = useAppDispatch()
+  const { theme, collapsed, locale } = useAppSelector((s) => s.ui)
 
   return (
     <>
@@ -26,7 +26,7 @@ export default function SettingDrawerAction() {
         icon={<SettingOutlined />}
         onClick={() => setOpen(true)}
       />
-      <Drawer title="界面设置" open={open} width={320} onClose={() => setOpen(false)}>
+      <Drawer title="界面设置" open={open} size={320} onClose={() => setOpen(false)}>
         <Space direction="vertical" className="w-full" size={20}>
           <div className="flex items-center justify-between">
             <Typography.Text>主题模式</Typography.Text>
@@ -62,5 +62,5 @@ export default function SettingDrawerAction() {
         </Space>
       </Drawer>
     </>
-  );
+  )
 }

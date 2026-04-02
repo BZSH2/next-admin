@@ -1,4 +1,4 @@
-const utilityAtRules = ['unocss', 'apply', 'screen', 'layer', 'responsive', 'variants', 'defs'];
+const utilityAtRules = ['unocss', 'apply', 'screen', 'layer', 'responsive', 'variants', 'defs']
 
 const stylelintConfig = {
   extends: ['stylelint-config-standard-scss', 'stylelint-config-recommended'],
@@ -62,6 +62,6 @@ const stylelintConfig = {
     'shorthand-property-no-redundant-values': true,
     'unit-allowed-list': ['px', 'em', 'rem', '%', 'vh', 'vw', 'vmin', 'vmax', 's', 'ms'],
   },
-};
+}
 
-export default stylelintConfig;
+export default stylelintConfig

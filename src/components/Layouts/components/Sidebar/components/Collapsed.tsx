@@ -1,9 +1,9 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
 
 interface CollapsedProps {
-  collapsed: boolean;
-  onCollapse: (collapsed: boolean) => void;
+  collapsed: boolean
+  onCollapse: (collapsed: boolean) => void
 }
 
 export default function Collapsed({ collapsed, onCollapse }: CollapsedProps) {
@@ -19,5 +19,5 @@ export default function Collapsed({ collapsed, onCollapse }: CollapsedProps) {
         color: '#64748b',
       }}
     />
-  );
+  )
 }

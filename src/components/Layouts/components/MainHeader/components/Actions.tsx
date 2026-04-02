@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import AvatarDropdown from './Avatar';
-import FullscreenAction from './Fullscreen';
-import LocaleAction from './Locale';
-import SettingDrawerAction from './Setting';
+import AvatarDropdown from './Avatar'
+import FullscreenAction from './Fullscreen'
+import LocaleAction from './Locale'
+import SettingDrawerAction from './Setting'
 
 interface ActionsProps {
-  compact?: boolean;
+  compact?: boolean
 }
 
 export default function Actions({ compact = false }: ActionsProps) {
@@ -17,5 +17,5 @@ export default function Actions({ compact = false }: ActionsProps) {
       <SettingDrawerAction />
       <AvatarDropdown compact={compact} />
     </div>
-  );
+  )
 }

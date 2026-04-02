@@ -17,5 +17,5 @@ export default function Logo({ collapsed }: { collapsed: boolean }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

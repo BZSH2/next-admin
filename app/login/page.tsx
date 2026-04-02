@@ -1,22 +1,22 @@
-'use client';
-import { useState } from 'react';
+'use client'
+import { useState } from 'react'
 
-import { definePageMeta } from '@/utils/meta';
+import { definePageMeta } from '@/utils/meta'
 
 definePageMeta({
   title: '登录',
   hideInMenu: true,
-});
+})
 
 export default function LoginPage() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsLoading(false);
-  };
+    e.preventDefault()
+    setIsLoading(true)
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    setIsLoading(false)
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 dark:bg-zinc-950">
@@ -82,5 +82,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

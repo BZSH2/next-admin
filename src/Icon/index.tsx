@@ -1,55 +1,55 @@
-'use client';
+'use client'
 
-import { type ComponentType, type SVGProps, useEffect, useState } from 'react';
+import { type ComponentType, type SVGProps, useEffect, useState } from 'react'
 
-type SvgComponent = ComponentType<SVGProps<SVGSVGElement>>;
+type SvgComponent = ComponentType<SVGProps<SVGSVGElement>>
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'name'> {
-  iconName: string;
-  size?: number | string;
+  iconName: string
+  size?: number | string
 }
 
 const getIconCandidates = (iconName: string) => {
-  const direct = iconName;
-  const slashPath = iconName.replace(/-/, '/');
+  const direct = iconName
+  const slashPath = iconName.replace(/-/, '/')
 
-  return Array.from(new Set([direct, slashPath]));
-};
+  return Array.from(new Set([direct, slashPath]))
+}
 
 export default function Icon({ iconName, size = 16, ...rest }: IconProps) {
-  const [Svg, setSvg] = useState<SvgComponent | null>(null);
+  const [Svg, setSvg] = useState<SvgComponent | null>(null)
 
   useEffect(() => {
-    let active = true;
+    let active = true
 
     const loadIcon = async () => {
       for (const candidate of getIconCandidates(iconName)) {
         try {
-          const iconModule = await import(`./svg/${candidate}.svg`);
+          const iconModule = await import(`./svg/${candidate}.svg`)
           if (active) {
-            setSvg(() => iconModule.default);
+            setSvg(() => iconModule.default)
           }
-          return;
+          return
         } catch {
-          continue;
+          continue
         }
       }
 
       if (active) {
-        setSvg(null);
+        setSvg(null)
       }
-    };
+    }
 
-    loadIcon();
+    loadIcon()
 
     return () => {
-      active = false;
-    };
-  }, [iconName]);
+      active = false
+    }
+  }, [iconName])
 
   if (!Svg) {
-    return null;
+    return null
   }
 
-  return <Svg width={size} height={size} {...rest} />;
+  return <Svg width={size} height={size} {...rest} />
 }

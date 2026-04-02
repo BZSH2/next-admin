@@ -46,7 +46,6 @@ pnpm renameSvg
 ```
 
 ```tsx
-import Icon from '@/Icon';
-
-<Icon iconName="menus/blackCat" size={18} className="text-slate-700" />;
+import Icon from '@/Icon'
+;<Icon iconName="menus/blackCat" size={18} className="text-slate-700" />
 ```

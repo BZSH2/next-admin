@@ -1,12 +1,12 @@
-import { definePageMeta } from '@/utils/meta';
-import Icon from '@/Icon';
+import { definePageMeta } from '@/utils/meta'
+import Icon from '@/Icon'
 
 export const { pageMeta, metadata } = definePageMeta({
   title: '工作台',
   icon: 'menus/goldenRetriever',
   sort: 1,
   description: '系统数据大盘与快捷操作',
-});
+})
 
 export default function DashboardPage() {
   return (
@@ -20,5 +20,5 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

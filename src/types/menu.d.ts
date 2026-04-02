@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata } from 'next'
 
 declare global {
   /**
@@ -13,47 +13,47 @@ declare global {
      * 页面/菜单标题（必填）
      * @example '工作台' | '用户管理'
      */
-    title: string;
+    title: string
     /**
      * 菜单图标标识
      * - 推荐使用项目内 SVG 名称（见 src/Icon/svg），如 'menus/hello'
      * - 也可以留空，渲染时会有默认图标
      * @example 'menus/hello'
      */
-    icon?: string;
+    icon?: string
     /**
      * 菜单排序权重（数字越小越靠前）
      * @default 99
      * @example 1
      */
-    sort?: number;
+    sort?: number
     /**
      * 是否在侧边菜单隐藏该页面
      * 适用于详情页、编辑页等
      * @default false
      */
-    hideInMenu?: boolean;
+    hideInMenu?: boolean
     /**
      * 是否在面包屑隐藏该页面
      * @default false
      */
-    hideInBreadcrumb?: boolean;
+    hideInBreadcrumb?: boolean
     /**
      * 点击父级菜单时的默认跳转路径
      * @example '/system/user'
      */
-    redirect?: string;
+    redirect?: string
     /**
      * 权限标识列表（RBAC）
      * @example ['system:user:read', 'system:user:edit']
      */
-    permissions?: string[];
+    permissions?: string[]
     /**
      * 路由激活高亮规则
      * 用于隐藏子路由时仍让某个父级菜单保持高亮
      * @example '/system/user'
      */
-    activeMenu?: string;
+    activeMenu?: string
   }
 
   /**
@@ -65,10 +65,10 @@ declare global {
      * 路由唯一标识（通常为路径）
      * @example '/dashboard'
      */
-    key: string;
+    key: string
     /**
      * 子菜单
      */
-    children?: MenuItem[];
+    children?: MenuItem[]
   }
 }

@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
-import { DownOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Dropdown } from 'antd';
-import type { MenuProps } from 'antd';
-import { useRouter } from 'next/navigation';
+import { DownOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
+import { Avatar, Dropdown } from 'antd'
+import type { MenuProps } from 'antd'
+import { useRouter } from 'next/navigation'
 
 interface AvatarDropdownProps {
-  compact?: boolean;
+  compact?: boolean
 }
 
 export default function AvatarDropdown({ compact = false }: AvatarDropdownProps) {
-  const router = useRouter();
+  const router = useRouter()
 
   const items: MenuProps['items'] = [
     {
@@ -32,13 +32,13 @@ export default function AvatarDropdown({ compact = false }: AvatarDropdownProps)
       danger: true,
       label: '退出登录',
     },
-  ];
+  ]
 
   const onClick: MenuProps['onClick'] = ({ key }) => {
     if (key === 'logout') {
-      router.push('/login');
+      router.push('/login')
     }
-  };
+  }
 
   return (
     <Dropdown menu={{ items, onClick }} trigger={['click']}>
@@ -51,5 +51,5 @@ export default function AvatarDropdown({ compact = false }: AvatarDropdownProps)
         {!compact ? <DownOutlined className="text-[10px] text-slate-400" /> : null}
       </button>
     </Dropdown>
-  );
+  )
 }

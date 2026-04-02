@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { GlobalOutlined } from '@ant-design/icons';
-import { Select } from 'antd';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setLocale, type LocaleType } from '@/store/slices/uiSlice';
+import { GlobalOutlined } from '@ant-design/icons'
+import { Select } from 'antd'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { setLocale, type LocaleType } from '@/store/slices/uiSlice'
 
 const localeOptions = [
   { label: '中文', value: 'zh-CN' },
   { label: 'English', value: 'en-US' },
-];
+]
 
 export default function LocaleAction() {
-  const locale = useAppSelector((s) => s.ui.locale);
-  const dispatch = useAppDispatch();
+  const locale = useAppSelector((s) => s.ui.locale)
+  const dispatch = useAppDispatch()
 
   return (
     <Select
@@ -25,5 +25,5 @@ export default function LocaleAction() {
       options={localeOptions}
       onChange={(v) => dispatch(setLocale(v as LocaleType))}
     />
-  );
+  )
 }

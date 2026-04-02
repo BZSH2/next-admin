@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import Sidebar from './components/Sidebar/index';
-import MainHeader from './components/MainHeader';
-import { useLayoutModeInitializer } from './hooks/useLayoutMode';
+import Sidebar from './components/Sidebar/index'
+import MainHeader from './components/MainHeader'
+import { useLayoutModeInitializer } from './hooks/useLayoutMode'
 
 export default function Layouts({ children }: { children: React.ReactNode }) {
-  useLayoutModeInitializer();
+  useLayoutModeInitializer()
 
   // 在 Next.js App Router 中，最优雅且支持 Server Component 的“单文件”样式方案
   // 就是使用 Utility Classes (如你项目中已安装的 UnoCSS/Tailwind)
@@ -22,5 +22,5 @@ export default function Layouts({ children }: { children: React.ReactNode }) {
         </div>
       </main>
     </div>
-  );
+  )
 }

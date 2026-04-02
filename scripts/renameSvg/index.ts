@@ -1,16 +1,16 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { pinyin } from 'pinyin-pro';
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { pinyin } from 'pinyin-pro'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 class RenameSvg {
-  private static instance: RenameSvg;
-  private readonly svgDir: string;
+  private static instance: RenameSvg
+  private readonly svgDir: string
 
   private constructor() {
-    this.svgDir = path.join(__dirname, '../../src/Icon/svg');
+    this.svgDir = path.join(__dirname, '../../src/Icon/svg')
   }
 
   /**
@@ -18,74 +18,74 @@ class RenameSvg {
    */
   public static getInstance(): RenameSvg {
     if (!RenameSvg.instance) {
-      RenameSvg.instance = new RenameSvg();
+      RenameSvg.instance = new RenameSvg()
     }
-    return RenameSvg.instance;
+    return RenameSvg.instance
   }
 
   /**
    * 执行入口：扫描 SVG、生成重命名计划并落盘
    */
   public execute() {
-    this.log('🚀 开始扫描 SVG 图标文件...');
+    this.log('🚀 开始扫描 SVG 图标文件...')
 
-    const svgFiles = this.collectSvgFiles(this.svgDir);
-    const plans = this.buildRenamePlans(svgFiles);
+    const svgFiles = this.collectSvgFiles(this.svgDir)
+    const plans = this.buildRenamePlans(svgFiles)
 
     if (plans.length === 0) {
-      this.log('✅ 所有 SVG 文件已是小驼峰格式，无需重命名。');
-      return;
+      this.log('✅ 所有 SVG 文件已是小驼峰格式，无需重命名。')
+      return
     }
 
-    this.ensureNoDuplicateTargets(plans);
-    this.renameWithTempNames(plans);
+    this.ensureNoDuplicateTargets(plans)
+    this.renameWithTempNames(plans)
 
-    this.log(`✅ 重命名完成，共处理 ${plans.length} 个 SVG 文件。`);
+    this.log(`✅ 重命名完成，共处理 ${plans.length} 个 SVG 文件。`)
   }
 
   /**
    * 递归收集目录中的全部 SVG 文件
    */
   private collectSvgFiles(dir: string): string[] {
-    if (!fs.existsSync(dir)) return [];
+    if (!fs.existsSync(dir)) return []
 
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    const files: string[] = [];
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+    const files: string[] = []
 
     for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
+      const fullPath = path.join(dir, entry.name)
       if (entry.isDirectory()) {
-        files.push(...this.collectSvgFiles(fullPath));
-        continue;
+        files.push(...this.collectSvgFiles(fullPath))
+        continue
       }
       if (entry.isFile() && path.extname(entry.name).toLowerCase() === '.svg') {
-        files.push(fullPath);
+        files.push(fullPath)
       }
     }
 
-    return files;
+    return files
   }
 
   /**
    * 基于当前文件名构建重命名计划
    */
   private buildRenamePlans(svgFiles: string[]) {
-    const plans: Array<{ from: string; temp: string; to: string }> = [];
+    const plans: Array<{ from: string; temp: string; to: string }> = []
 
     for (const filePath of svgFiles) {
-      const dir = path.dirname(filePath);
-      const ext = path.extname(filePath);
-      const baseName = path.basename(filePath, ext);
-      const nextBaseName = this.toLowerCamel(baseName);
+      const dir = path.dirname(filePath)
+      const ext = path.extname(filePath)
+      const baseName = path.basename(filePath, ext)
+      const nextBaseName = this.toLowerCamel(baseName)
 
-      if (nextBaseName === baseName) continue;
+      if (nextBaseName === baseName) continue
 
-      const to = path.join(dir, `${nextBaseName}${ext}`);
-      const temp = path.join(dir, `${baseName}.__renameSvg_tmp__${ext}`);
-      plans.push({ from: filePath, temp, to });
+      const to = path.join(dir, `${nextBaseName}${ext}`)
+      const temp = path.join(dir, `${baseName}.__renameSvg_tmp__${ext}`)
+      plans.push({ from: filePath, temp, to })
     }
 
-    return plans;
+    return plans
   }
 
   /**
@@ -97,59 +97,59 @@ class RenameSvg {
       .replace(/[_\-\s]+/g, ' ')
       .trim()
       .split(/\s+/)
-      .filter(Boolean);
+      .filter(Boolean)
 
-    const parts = baseParts.flatMap((part) => this.expandToAsciiParts(part));
-    if (parts.length === 0) return name;
+    const parts = baseParts.flatMap((part) => this.expandToAsciiParts(part))
+    if (parts.length === 0) return name
 
-    const first = parts[0];
-    if (!first) return name;
-    const rest = parts.slice(1);
-    const firstPart = first.charAt(0).toLowerCase() + first.slice(1);
-    const restPart = rest.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join('');
+    const first = parts[0]
+    if (!first) return name
+    const rest = parts.slice(1)
+    const firstPart = first.charAt(0).toLowerCase() + first.slice(1)
+    const restPart = rest.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join('')
 
-    const finalName = `${firstPart}${restPart}`;
+    const finalName = `${firstPart}${restPart}`
     if (/^[0-9]/.test(finalName)) {
-      return `icon${finalName.charAt(0).toUpperCase()}${finalName.slice(1)}`;
+      return `icon${finalName.charAt(0).toUpperCase()}${finalName.slice(1)}`
     }
-    return finalName;
+    return finalName
   }
 
   /**
    * 将非 ASCII 内容扩展为可参与命名的 ASCII 片段
    */
   private expandToAsciiParts(part: string): string[] {
-    const parts: string[] = [];
-    let current = '';
+    const parts: string[] = []
+    let current = ''
 
     for (const char of part) {
       if (/[a-zA-Z0-9]/.test(char)) {
-        current += char;
-        continue;
+        current += char
+        continue
       }
 
       if (current) {
-        parts.push(current);
-        current = '';
+        parts.push(current)
+        current = ''
       }
 
       if (this.isHan(char)) {
-        parts.push(this.hanToPinyin(char));
+        parts.push(this.hanToPinyin(char))
       }
     }
 
     if (current) {
-      parts.push(current);
+      parts.push(current)
     }
 
-    return parts;
+    return parts
   }
 
   /**
    * 判断字符是否为汉字
    */
   private isHan(char: string): boolean {
-    return /\p{Script=Han}/u.test(char);
+    return /\p{Script=Han}/u.test(char)
   }
 
   /**
@@ -163,33 +163,33 @@ class RenameSvg {
       nonZh: 'removed',
     })
       .map((item) => item.toLowerCase())
-      .join('');
+      .join('')
 
     if (normalized) {
-      return normalized;
+      return normalized
     }
 
-    const code = text.codePointAt(0);
-    if (!code) return 'u0';
-    return `u${code.toString(16)}`;
+    const code = text.codePointAt(0)
+    if (!code) return 'u0'
+    return `u${code.toString(16)}`
   }
 
   /**
    * 校验目标文件名是否冲突，避免覆盖已有图标
    */
   private ensureNoDuplicateTargets(plans: Array<{ from: string; temp: string; to: string }>) {
-    const duplicateMap = new Map<string, string[]>();
+    const duplicateMap = new Map<string, string[]>()
 
     for (const plan of plans) {
-      const key = plan.to.toLowerCase();
-      const exists = duplicateMap.get(key) ?? [];
-      exists.push(plan.from);
-      duplicateMap.set(key, exists);
+      const key = plan.to.toLowerCase()
+      const exists = duplicateMap.get(key) ?? []
+      exists.push(plan.from)
+      duplicateMap.set(key, exists)
     }
 
     for (const [to, fromList] of duplicateMap) {
       if (fromList.length > 1) {
-        throw new Error(`检测到重名冲突：${fromList.join(', ')} -> ${to}`);
+        throw new Error(`检测到重名冲突：${fromList.join(', ')} -> ${to}`)
       }
     }
   }
@@ -199,16 +199,16 @@ class RenameSvg {
    */
   private renameWithTempNames(plans: Array<{ from: string; temp: string; to: string }>) {
     for (const plan of plans) {
-      fs.renameSync(plan.from, plan.temp);
+      fs.renameSync(plan.from, plan.temp)
     }
     for (const plan of plans) {
-      fs.renameSync(plan.temp, plan.to);
+      fs.renameSync(plan.temp, plan.to)
     }
   }
 
   private log(message: string) {
-    process.stdout.write(`${message}\n`);
+    process.stdout.write(`${message}\n`)
   }
 }
 
-RenameSvg.getInstance().execute();
+RenameSvg.getInstance().execute()

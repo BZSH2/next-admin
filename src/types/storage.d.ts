@@ -11,23 +11,23 @@ declare global {
      */
     interface Schema {
       /** 主题模式 */
-      theme: 'light' | 'dark' | 'system';
+      theme: 'light' | 'dark' | 'system'
       /** 国际化语言 */
-      locale: 'zh-CN' | 'en-US';
+      locale: 'zh-CN' | 'en-US'
     }
 
     /** 所有合法键名 */
-    type Key = keyof Schema;
+    type Key = keyof Schema
     /** 根据键名推导对应值类型 */
-    type Value<K extends Key = Key> = Schema[K];
+    type Value<K extends Key = Key> = Schema[K]
     /** 键值条目工具类型 */
     type Entry<K extends Key = Key> = {
-      key: K;
-      value: Value<K>;
-    };
+      key: K
+      value: Value<K>
+    }
     /** 存储类型 */
-    type type = 'local' | 'session';
+    type type = 'local' | 'session'
   }
 }
 
-export {};
+export {}

@@ -4,6 +4,6 @@ const config = {
       configOrPath: 'uno.config.ts',
     },
   },
-};
+}
 
-export default config;
+export default config

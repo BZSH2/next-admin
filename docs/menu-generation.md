@@ -22,11 +22,11 @@
 ## 示例
 
 ```tsx
-import { definePageMeta } from '@/utils/meta';
+import { definePageMeta } from '@/utils/meta'
 
 export const { pageMeta, metadata } = definePageMeta({
   title: '用户管理',
   icon: 'UserOutlined',
   sort: 1,
-});
+})
 ```

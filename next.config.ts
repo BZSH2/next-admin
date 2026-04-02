@@ -1,4 +1,4 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from 'next'
 
 const securityHeaders = [
   {
@@ -25,7 +25,7 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
   },
-];
+]
 
 const nextConfig: NextConfig = {
   output: 'standalone',
@@ -45,8 +45,8 @@ const nextConfig: NextConfig = {
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
-    });
-    return config;
+    })
+    return config
   },
   headers: async () => [
     {
@@ -66,6 +66,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['@unocss/runtime', '@unocss/core'],
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
