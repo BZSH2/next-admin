@@ -5,6 +5,7 @@
   "packageManager": "pnpm@10.10.0",
   "scripts": {
     "openMenu": "esno scripts/generateMenu/index.ts",
+    "renameSvg": "esno scripts/renameSvg/index.ts",
     "commit": "chcp 65001>nul && czg",
     "cz": "chcp 65001>nul && git add . && czg",
     "dev": "next dev",
@@ -56,6 +57,7 @@
     "esno": "^4.8.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "pinyin-pro": "^3.28.0",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
