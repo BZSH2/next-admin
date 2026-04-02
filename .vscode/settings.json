@@ -59,7 +59,10 @@
     "adduser",
     "bzsh",
     "commitlintrc",
+    "Deutsch",
     "esno",
+    "Español",
+    "Français",
     "HEALTHCHECK",
     "lintable",
     "necolas",
@@ -72,6 +75,7 @@
     "turbopack",
     "vercel",
     "webp",
-    "zstd"
+    "zstd",
+    "Русский"
   ]
 }
