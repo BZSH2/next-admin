@@ -11,7 +11,7 @@ export default function SettingDrawerAction() {
   return (
     <>
       <ActionBlock title="界面设置" onClick={() => settingDrawerRef.current?.open()}>
-        <Icon iconName="layout/setting" size={18} />
+        <Icon iconName="layout-cog" size={16} />
       </ActionBlock>
 
       <SettingDrawer ref={settingDrawerRef} />

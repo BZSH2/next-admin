@@ -25,7 +25,7 @@ export default function FullscreenAction() {
 
   return (
     <ActionBlock title={isFullscreen ? '退出全屏' : '全屏'} onClick={toggle}>
-      <Icon iconName="menus/hamster" size={18} />
+      <Icon iconName={`layout-${isFullscreen ? 'maximize' : 'minimize'}`} size={16} />
     </ActionBlock>
   )
 }

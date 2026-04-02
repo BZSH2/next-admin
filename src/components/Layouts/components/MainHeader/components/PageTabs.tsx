@@ -56,16 +56,23 @@ export default function PageTabs() {
   }
 
   return (
-    <Tabs
-      className="w-full"
-      type="editable-card"
-      hideAdd
-      size="small"
-      tabBarStyle={{ margin: 0 }}
-      activeKey={activeKey || pathname}
-      items={tabs}
-      onChange={onChange}
-      onEdit={onEdit}
-    />
+    <>
+      <Tabs
+        className="pages-tabs flex h-full flex-1 justify-end"
+        type="editable-card"
+        hideAdd
+        size="small"
+        tabBarStyle={{ margin: 0 }}
+        activeKey={activeKey || pathname}
+        items={tabs}
+        onChange={onChange}
+        onEdit={onEdit}
+      />
+      <style jsx>{`
+        :global(.pages-tabs .ant-tabs-content-holder) {
+          display: none;
+        }
+      `}</style>
+    </>
   )
 }
