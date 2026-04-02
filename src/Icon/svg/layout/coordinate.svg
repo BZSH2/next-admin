@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3623" width="1024" height="1024"><path d="M480 512h64v320h-64V512z" fill="#383838" p-id="3624"></path><path d="M192 896h640a64 64 0 0 0-64-64H256a64 64 0 0 0-64 64z m64-128h512a128 128 0 0 1 128 128v64H128v-64a128 128 0 0 1 128-128z m256-256a192 192 0 1 0 0-384 192 192 0 0 0 0 384z m0 64a256 256 0 1 1 0-512 256 256 0 0 1 0 512z" fill="#383838" p-id="3625"></path></svg>

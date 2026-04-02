@@ -1,8 +1,7 @@
 'use client'
-
-import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import Icon from '@/Icon'
 import { useEffect, useState } from 'react'
+import ActionBlock from './ActionBlock'
 
 export default function FullscreenAction() {
   const [isFullscreen, setIsFullscreen] = useState(false)
@@ -25,12 +24,8 @@ export default function FullscreenAction() {
   }
 
   return (
-    <Button
-      type="text"
-      size="small"
-      className="text-slate-600"
-      icon={isFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-      onClick={toggle}
-    />
+    <ActionBlock title={isFullscreen ? '退出全屏' : '全屏'} onClick={toggle}>
+      <Icon iconName="menus/hamster" size={18} />
+    </ActionBlock>
   )
 }

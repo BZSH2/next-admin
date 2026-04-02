@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { defaultLocale, type LocaleCode } from '@/config/locale.config'
 import { settingConfig } from '@/config/setting.config'
 
 export type Theme = 'light' | 'dark' | 'system'
-export type LocaleType = 'zh-CN' | 'en-US'
+export type LocaleType = LocaleCode
 
 interface UIState {
   theme: Theme
@@ -12,7 +13,7 @@ interface UIState {
 
 const initialState: UIState = {
   theme: 'light',
-  locale: 'zh-CN',
+  locale: defaultLocale,
   collapsed: settingConfig.collapsed,
 }
 

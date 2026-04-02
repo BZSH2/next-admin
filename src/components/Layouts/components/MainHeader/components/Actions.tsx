@@ -11,7 +11,7 @@ interface ActionsProps {
 
 export default function Actions({ compact = false }: ActionsProps) {
   return (
-    <div className="ml-2 flex items-center gap-1 border-l border-slate-200 pl-2">
+    <div className="flex h-full items-center">
       {!compact ? <LocaleAction /> : null}
       {!compact ? <FullscreenAction /> : null}
       <SettingDrawerAction />

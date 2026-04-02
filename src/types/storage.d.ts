@@ -1,3 +1,5 @@
+import type { LocaleCode } from '@/config/locale.config'
+
 /**
  * 应用级存储类型声明
  *
@@ -13,7 +15,7 @@ declare global {
       /** 主题模式 */
       theme: 'light' | 'dark' | 'system'
       /** 国际化语言 */
-      locale: 'zh-CN' | 'en-US'
+      locale: LocaleCode
     }
 
     /** 所有合法键名 */

@@ -2,13 +2,9 @@
 
 import { GlobalOutlined } from '@ant-design/icons'
 import { Select } from 'antd'
+import { localeOptions } from '@/config/locale.config'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setLocale, type LocaleType } from '@/store/slices/uiSlice'
-
-const localeOptions = [
-  { label: '中文', value: 'zh-CN' },
-  { label: 'English', value: 'en-US' },
-]
 
 export default function LocaleAction() {
   const locale = useAppSelector((s) => s.ui.locale)
@@ -19,7 +15,7 @@ export default function LocaleAction() {
       size="small"
       variant="borderless"
       value={locale}
-      style={{ width: 96 }}
+      style={{ width: 140 }}
       className="rounded-md bg-slate-100"
       suffixIcon={<GlobalOutlined />}
       options={localeOptions}
