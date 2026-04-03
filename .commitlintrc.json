@@ -84,6 +84,6 @@
         "description": "请输入 Issue（如：#123）：\n"
       }
     },
-    "useEmoji": false
+    "useEmoji": true
   }
 }
