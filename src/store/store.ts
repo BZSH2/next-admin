@@ -1,15 +1,15 @@
-import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit'
-import uiReducer, { setTheme } from './slices/uiSlice'
-import tabsReducer from './slices/tabsSlice'
-import layoutReducer from './slices/layoutSlice'
 import { setStorage } from '@/utils/storage'
+import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit'
+import layoutReducer from './slices/layoutSlice'
+import tabsReducer from './slices/tabsSlice'
+import uiReducer, { setPrimaryColor } from './slices/uiSlice'
 
 export const listenerMiddleware = createListenerMiddleware()
 
 listenerMiddleware.startListening({
-  actionCreator: setTheme,
+  actionCreator: setPrimaryColor,
   effect: async (action) => {
-    setStorage('theme', action.payload, 'local')
+    setStorage('primaryColor', action.payload, 'local')
   },
 })
 

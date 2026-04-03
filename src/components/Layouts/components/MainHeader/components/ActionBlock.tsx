@@ -15,7 +15,7 @@ export default forwardRef<HTMLButtonElement, ActionBlockProps>(function ActionBl
     <Tooltip title={title}>
       <button
         ref={ref}
-        className={`px-10px action-block flex h-full cursor-pointer items-center transition-colors hover:bg-slate-100 ${className}`}
+        className={`px-10px action-block flex h-full cursor-pointer items-center text-slate-700 transition-colors hover:bg-slate-100 ${className}`}
         onClick={onClick}
         {...rest}
       >

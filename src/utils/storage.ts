@@ -9,9 +9,9 @@ import { settingConfig } from '@/config/setting.config'
  * - 统一 API：通过第三个参数选择使用 'local' 或 'session'
  *
  * 示例：
- * setStorage('theme', 'dark', 'local')
- * getStorage('collapsed', 'session') // boolean | null
- * removeStorage('theme', 'local')
+ * setStorage('primaryColor', '#1677ff', 'local')
+ * getStorage('locale', 'local') // Locale.Code | null
+ * removeStorage('primaryColor', 'local')
  */
 const PREFIX = settingConfig.cacheKeyPrefix
 const isBrowser = typeof window !== 'undefined'

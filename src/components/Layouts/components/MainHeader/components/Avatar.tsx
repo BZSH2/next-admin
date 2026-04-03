@@ -1,9 +1,9 @@
 'use client'
 
 import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
-import { Avatar, Dropdown } from 'antd'
-import type { MenuProps } from 'antd'
 import { useI18n } from '@I18n'
+import type { MenuProps } from 'antd'
+import { Avatar, Dropdown } from 'antd'
 import { useRouter } from 'next/navigation'
 
 interface AvatarDropdownProps {

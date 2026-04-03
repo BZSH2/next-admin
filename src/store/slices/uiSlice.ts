@@ -1,16 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import { settingConfig } from '@/config/setting.config'
-
-export type Theme = 'light' | 'dark' | 'system'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 interface UIState {
-  theme: Theme
+  primaryColor: Storage.Value<'primaryColor'>
   collapsed: boolean
 }
 
 const initialState: UIState = {
-  theme: 'light',
+  primaryColor: settingConfig.primaryColor,
   collapsed: settingConfig.collapsed,
 }
 
@@ -18,8 +16,8 @@ const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    setTheme(state, action: PayloadAction<Theme>) {
-      state.theme = action.payload
+    setPrimaryColor(state, action: PayloadAction<Storage.Value<'primaryColor'>>) {
+      state.primaryColor = action.payload
     },
     setCollapsed(state, action: PayloadAction<boolean>) {
       state.collapsed = action.payload
@@ -30,5 +28,5 @@ const uiSlice = createSlice({
   },
 })
 
-export const { setTheme, setCollapsed, toggleCollapsed } = uiSlice.actions
+export const { setPrimaryColor, setCollapsed, toggleCollapsed } = uiSlice.actions
 export default uiSlice.reducer

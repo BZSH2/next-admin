@@ -1,11 +1,21 @@
 @import './normalize.css';
+@import './theme.tokens';
 @unocss all;
 
 :root {
   --background: #fff;
   --foreground: #171717;
+  --primary: #1677ff;
   --font-sans: var(--font-geist-sans), arial, helvetica, sans-serif;
   --font-mono: var(--font-geist-mono), 'SFMono-Regular', consolas, monospace;
+  --layout-sider-bg: #fff;
+}
+
+.dark {
+  --background: #020617;
+  --foreground: #e2e8f0;
+  --primary: #1677ff;
+  --layout-sider-bg: #020617;
 }
 
 [class*='-container'] {

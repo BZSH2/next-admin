@@ -1,13 +1,13 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Menu as AntdMenu } from 'antd'
-import { useRouter, usePathname } from 'next/navigation'
-import type { MenuProps } from 'antd'
-import type { ItemType, MenuItemType } from 'antd/es/menu/interface'
 import Icon from '@/Icon'
 import { menuConfig } from '@/config/menu'
 import { useI18n } from '@I18n'
+import type { MenuProps } from 'antd'
+import { Menu as AntdMenu } from 'antd'
+import type { ItemType, MenuItemType } from 'antd/es/menu/interface'
+import { usePathname, useRouter } from 'next/navigation'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 const getOpenKeysFromPath = (path: string) => {
   const parts = path.split('/').filter(Boolean)
@@ -75,7 +75,7 @@ export default function Menu({ onNavigate }: MenuPropsExt) {
   return (
     <AntdMenu
       theme="light"
-      className="border-r-0 bg-white pt-2"
+      className="border-r-0 pt-2"
       selectedKeys={selectedKey ? [selectedKey] : []}
       openKeys={openKeys}
       onOpenChange={onOpenChange}

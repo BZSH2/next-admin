@@ -12,11 +12,11 @@ export default function Collapsed({ collapsed, onCollapse }: CollapsedProps) {
       type="text"
       icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       onClick={() => onCollapse(!collapsed)}
+      className="text-slate-500"
       style={{
         fontSize: '16px',
         width: 40,
         height: 40,
-        color: '#64748b',
       }}
     />
   )

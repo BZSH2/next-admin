@@ -10,8 +10,8 @@ declare global {
      * 存储 Schema：集中声明允许的键与值类型
      */
     interface Schema {
-      /** 主题模式 */
-      theme: 'light' | 'dark' | 'system'
+      /** 主题色 */
+      primaryColor: `#${string}`
       /** 国际化语言 */
       locale: Locale.Code
     }

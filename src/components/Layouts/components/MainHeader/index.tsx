@@ -1,9 +1,9 @@
 'use client'
 
-import PageTabs from './components/PageTabs'
-import Actions from './components/Actions'
 import { useLayoutMode } from '../../hooks/useLayoutMode'
+import Actions from './components/Actions'
 import Collapsed from './components/Collapsed'
+import PageTabs from './components/PageTabs'
 
 export default function MainHeader() {
   const { isMobile } = useLayoutMode()
@@ -11,7 +11,7 @@ export default function MainHeader() {
   const compactActions = isMobile
 
   return (
-    <header className="h-44px px-12px flex items-center justify-between bg-white">
+    <header className="h-44px px-12px flex items-center justify-between border-b border-slate-200 bg-white">
       {isMobile ? <Collapsed /> : <PageTabs />}
       <Actions compact={compactActions} />
     </header>

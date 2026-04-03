@@ -1,0 +1,9 @@
+:root {
+  --theme-primary: var(--primary);
+  --theme-primary-hover: color-mix(in srgb, var(--primary) 88%, #000);
+  --theme-primary-active: color-mix(in srgb, var(--primary) 76%, #000);
+  --theme-primary-soft-bg: color-mix(in srgb, var(--primary) 12%, #fff);
+  --theme-primary-soft-border: color-mix(in srgb, var(--primary) 28%, #fff);
+  --theme-primary-soft-text: color-mix(in srgb, var(--primary) 72%, #000);
+  --theme-primary-glow: color-mix(in srgb, var(--primary) 36%, transparent);
+}

@@ -1,9 +1,9 @@
 'use client'
 
-import Sidebar from './components/Sidebar/index'
-import MainHeader from './components/MainHeader'
-import { useLayoutModeInitializer } from './hooks/useLayoutMode'
 import { useSyncExternalStore } from 'react'
+import MainHeader from './components/MainHeader'
+import Sidebar from './components/Sidebar/index'
+import { useLayoutModeInitializer } from './hooks/useLayoutMode'
 
 // 空的订阅函数，因为我们只需要用来区分客户端和服务端
 const emptySubscribe = () => () => {}

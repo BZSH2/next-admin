@@ -28,7 +28,7 @@ export default function Sidebar() {
         closable={false}
         styles={{
           header: { display: 'none' },
-          body: { padding: 0, background: '#ffffff' },
+          body: { padding: 0, background: 'var(--layout-sider-bg)' },
         }}
       >
         <div className="flex h-full flex-col">
@@ -56,7 +56,7 @@ export default function Sidebar() {
         <div className="flex-1 overflow-x-hidden overflow-y-auto">
           <Menu />
         </div>
-        <div className="flex justify-center border-t border-slate-700/50 py-2">
+        <div className="flex justify-center border-t border-slate-200 py-2">
           <Collapsed collapsed={collapsed} onCollapse={onSetCollapsed} />
         </div>
       </div>
