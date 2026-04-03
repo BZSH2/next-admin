@@ -1,8 +1,9 @@
 'use client'
 
-import { DownOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
+import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { Avatar, Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
+import { useI18n } from '@I18n'
 import { useRouter } from 'next/navigation'
 
 interface AvatarDropdownProps {
@@ -11,17 +12,13 @@ interface AvatarDropdownProps {
 
 export default function AvatarDropdown({ compact = false }: AvatarDropdownProps) {
   const router = useRouter()
+  const { t } = useI18n()
 
   const items: MenuProps['items'] = [
     {
       key: 'profile',
       icon: <UserOutlined />,
-      label: '个人中心',
-    },
-    {
-      key: 'settings',
-      icon: <SettingOutlined />,
-      label: '账户设置',
+      label: t('测试'),
     },
     {
       type: 'divider',
@@ -30,7 +27,7 @@ export default function AvatarDropdown({ compact = false }: AvatarDropdownProps)
       key: 'logout',
       icon: <LogoutOutlined />,
       danger: true,
-      label: '退出登录',
+      label: t('退出登录'),
     },
   ]
 

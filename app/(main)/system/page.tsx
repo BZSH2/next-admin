@@ -2,7 +2,7 @@ import { definePageMeta } from '@/utils/meta'
 
 // 对于像 /system 这样的纯目录路由（点击后应该展开子菜单或重定向到子页面）
 // 我们通过 redirect 字段告诉系统它的默认跳转行为，同时设定它在菜单里的父级名称和图标
-export const { pageMeta, metadata } = definePageMeta({
+export const { pageMeta, metadata, generateMetadata } = definePageMeta({
   title: '系统管理',
   icon: 'menus/borderCollie',
   sort: 99,

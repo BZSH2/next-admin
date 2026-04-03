@@ -1,6 +1,6 @@
 import { definePageMeta } from '@/utils/meta'
 
-export const { pageMeta, metadata } = definePageMeta({
+export const { pageMeta, metadata, generateMetadata } = definePageMeta({
   title: '用户管理',
   icon: 'menus/corgi',
   sort: 1,

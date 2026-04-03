@@ -5,45 +5,47 @@ import type { TabsProps } from 'antd'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 import { menuConfig } from '@/config/menu'
+import { useI18n } from '@I18n'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { addOrActivate, remove, type TabItem } from '@/store/slices/tabsSlice'
+import { addOrActivate, remove, syncTitles, type TabItem } from '@/store/slices/tabsSlice'
 
-const flattenMenu = (items: MenuItem[], acc: Record<string, string> = {}) => {
+const flattenMenu = (
+  items: MenuItem[],
+  tr: (key: string) => string,
+  acc: Record<string, string> = {}
+) => {
   for (const it of items) {
-    acc[it.key] = it.title
-    if (it.children) flattenMenu(it.children, acc)
+    acc[it.key] = tr(it.title) || it.title
+    if (it.children) flattenMenu(it.children, tr, acc)
   }
   return acc
-}
-
-const titleMap = flattenMenu(menuConfig)
-
-const getTitleByPath = (path: string) => {
-  return titleMap[path] ?? decodeURIComponent(path.split('/').filter(Boolean).pop() || '首页')
 }
 
 export default function PageTabs() {
   const router = useRouter()
   const pathname = usePathname()
+  const { t } = useI18n()
   const dispatch = useAppDispatch()
   const { items, activeKey } = useAppSelector((s) => s.tabs)
+  const titleMap = useMemo(() => flattenMenu(menuConfig, t), [t])
 
   useEffect(() => {
-    const title = getTitleByPath(pathname)
+    dispatch(syncTitles(titleMap))
+  }, [titleMap, dispatch])
+
+  useEffect(() => {
+    const fallback = pathname.split('/').filter(Boolean).pop() || ''
+    const title = titleMap[pathname] ?? decodeURIComponent(fallback)
     dispatch(
       addOrActivate({ key: pathname, title, closable: pathname !== '/dashboard' } satisfies TabItem)
     )
-  }, [pathname, dispatch])
+  }, [pathname, titleMap, dispatch])
 
-  const tabs: TabsProps['items'] = useMemo(
-    () =>
-      items.map((t) => ({
-        key: t.key,
-        label: t.title,
-        closable: t.closable ?? true,
-      })),
-    [items]
-  )
+  const tabs: TabsProps['items'] = items.map((tab) => ({
+    key: tab.key,
+    label: tab.title,
+    closable: tab.closable ?? true,
+  }))
 
   const onChange: TabsProps['onChange'] = (key) => {
     router.push(String(key))

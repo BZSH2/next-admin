@@ -1,0 +1,18 @@
+{
+  "测试": "test1",
+  "打开侧边导航": "Open Sidebar",
+  "登录": "Log in",
+  "工作台": "Dashboard",
+  "角色管理": "role management",
+  "界面设置": "UI Settings",
+  "全屏": "Fullscreen",
+  "首页": "Home",
+  "退出登录": "Logout",
+  "退出全屏": "Exit Fullscreen",
+  "系统管理": "System management",
+  "系统角色与权限分配管理": "System role and permission allocation management",
+  "系统数据大盘与快捷操作": "System data disk and quick operations",
+  "系统账号与用户信息管理": "System account and user information management",
+  "用户管理": "User management",
+  "Next Admin - 后台管理系统": "Next Admin - Backend management system"
+}

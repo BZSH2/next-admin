@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 import { menuConfig } from '@/config/menu'
 
 export interface TabItem {
@@ -30,6 +31,29 @@ const HOME_TAB: TabItem = {
   closable: false,
 }
 
+const createHomeTab = (title?: string): TabItem => ({
+  ...HOME_TAB,
+  title: title || HOME_TAB.title,
+  closable: false,
+})
+
+const normalizeTab = (tab: TabItem): TabItem => {
+  if (tab.key === HOME_TAB_KEY) {
+    return createHomeTab(tab.title)
+  }
+  return {
+    ...tab,
+    closable: tab.closable ?? true,
+  }
+}
+
+const ensureHomeTab = (state: TabsState, title?: string) => {
+  const currentHome = state.items.find((tab) => tab.key === HOME_TAB_KEY)
+  const nextHomeTitle = title || currentHome?.title || HOME_TAB.title
+  const others = state.items.filter((tab) => tab.key !== HOME_TAB_KEY).map(normalizeTab)
+  state.items = [createHomeTab(nextHomeTitle), ...others]
+}
+
 const initialState: TabsState = {
   items: [HOME_TAB],
   activeKey: HOME_TAB_KEY,
@@ -39,28 +63,28 @@ const tabsSlice = createSlice({
   name: 'tabs',
   initialState,
   reducers: {
+    syncTitles(state, action: PayloadAction<Record<string, string>>) {
+      const titleMap = action.payload
+      ensureHomeTab(state, titleMap[HOME_TAB_KEY])
+      state.items = state.items.map((tab) => {
+        const nextTitle = titleMap[tab.key]
+        return normalizeTab(nextTitle ? { ...tab, title: nextTitle } : tab)
+      })
+    },
     addOrActivate(state, action: PayloadAction<TabItem>) {
-      if (state.items.length === 0 || state.items[0]?.key !== HOME_TAB_KEY) {
-        state.items = [HOME_TAB, ...state.items.filter((t) => t.key !== HOME_TAB_KEY)]
-      } else {
-        state.items[0] = { ...state.items[0], closable: false }
+      ensureHomeTab(state)
+      const payload = normalizeTab(action.payload)
+      if (payload.key === HOME_TAB_KEY) {
+        state.items[0] = createHomeTab(payload.title)
+        state.activeKey = payload.key
+        return
       }
 
-      const exists = state.items.find((t) => t.key === action.payload.key)
+      const exists = state.items.find((tab) => tab.key === payload.key)
       if (!exists) {
-        const nextTab = {
-          ...action.payload,
-          closable: action.payload.key === HOME_TAB_KEY ? false : (action.payload.closable ?? true),
-        }
-        if (action.payload.key === HOME_TAB_KEY) {
-          state.items[0] = { ...HOME_TAB, title: action.payload.title || HOME_TAB.title }
-        } else {
-          state.items.push(nextTab)
-        }
-      } else if (action.payload.key === HOME_TAB_KEY) {
-        state.items[0] = { ...HOME_TAB, title: action.payload.title || HOME_TAB.title }
+        state.items.push(payload)
       }
-      state.activeKey = action.payload.key
+      state.activeKey = payload.key
     },
     activate(state, action: PayloadAction<string>) {
       state.activeKey = action.payload
@@ -76,11 +100,11 @@ const tabsSlice = createSlice({
       }
     },
     reset(state) {
-      state.items = [HOME_TAB]
+      state.items = [createHomeTab()]
       state.activeKey = HOME_TAB_KEY
     },
   },
 })
 
-export const { addOrActivate, activate, remove, reset } = tabsSlice.actions
+export const { syncTitles, addOrActivate, activate, remove, reset } = tabsSlice.actions
 export default tabsSlice.reducer

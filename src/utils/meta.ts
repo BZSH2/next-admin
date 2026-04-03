@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getMessages } from 'next-intl/server'
 
 /**
  * 页面元数据定义辅助函数
@@ -22,12 +23,35 @@ import type { Metadata } from 'next'
 export function definePageMeta(meta: PageMeta): {
   pageMeta: PageMeta
   metadata: Metadata
+  generateMetadata: () => Promise<Metadata>
 } {
-  // 从传入的混合配置中，剥离出所有官方支持的 Metadata 字段
-  // （实际上在运行时，多余的字段传给 Next.js 的 metadata 也不会报错，
-  //   但为了极致的规范，我们直接把完整的 meta 作为 metadata 返回，因为 TypeScript 类型已经保证了兼容性）
+  const description = typeof meta.description === 'string' ? meta.description : undefined
+  const metadata: Metadata = {
+    title: meta.title,
+    description,
+  }
+
   return {
     pageMeta: meta,
-    metadata: meta as Metadata,
+    metadata,
+    generateMetadata: async () =>
+      buildPageMetadata({
+        title: meta.title,
+        ...(description ? { description } : {}),
+      }),
   }
+}
+
+export async function buildPageMetadata(meta: { title: string; description?: string | null }) {
+  const messages = (await getMessages()) as Record<string, unknown>
+  const getText = (key?: string | null) => {
+    if (!key) return undefined
+    const value = messages[key]
+    return typeof value === 'string' ? value : key
+  }
+
+  return {
+    title: getText(meta.title),
+    description: getText(meta.description),
+  } satisfies Metadata
 }

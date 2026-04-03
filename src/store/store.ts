@@ -1,5 +1,5 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit'
-import uiReducer, { setLocale, setTheme } from './slices/uiSlice'
+import uiReducer, { setTheme } from './slices/uiSlice'
 import tabsReducer from './slices/tabsSlice'
 import layoutReducer from './slices/layoutSlice'
 import { setStorage } from '@/utils/storage'
@@ -10,13 +10,6 @@ listenerMiddleware.startListening({
   actionCreator: setTheme,
   effect: async (action) => {
     setStorage('theme', action.payload, 'local')
-  },
-})
-
-listenerMiddleware.startListening({
-  actionCreator: setLocale,
-  effect: async (action) => {
-    setStorage('locale', action.payload, 'local')
   },
 })
 

@@ -4,30 +4,30 @@
 export const menuConfig: MenuItem[] = [
   {
     key: '/dashboard',
-    title: '工作台',
+    title: '首页',
     sort: 1,
-    icon: 'menus/happy',
+    icon: 'menus/goldenRetriever',
     description: '系统数据大盘与快捷操作',
   },
   {
     key: '/system',
     title: '系统管理',
     sort: 99,
-    icon: 'menus/serious',
+    icon: 'menus/borderCollie',
     redirect: '/system/user',
     children: [
       {
         key: '/system/user',
         title: '用户管理',
         sort: 1,
-        icon: 'menus/hey',
+        icon: 'menus/corgi',
         description: '系统账号与用户信息管理',
       },
       {
         key: '/system/role',
         title: '角色管理',
         sort: 2,
-        icon: 'menus/strong',
+        icon: 'menus/blackCat',
         description: '系统角色与权限分配管理',
       },
     ],

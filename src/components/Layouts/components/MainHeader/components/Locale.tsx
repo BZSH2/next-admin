@@ -1,35 +1,38 @@
 'use client'
 import { Dropdown, type MenuProps } from 'antd'
 import { languages } from '@/config/locale.config'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { setLocale, type LocaleType } from '@/store/slices/uiSlice'
 import ActionBlock from './ActionBlock'
 import Icon from '@/Icon'
+import { useRouter } from 'next/navigation'
 
 export default function LocaleAction() {
-  const locale = useAppSelector((s) => s.ui.locale)
-  const dispatch = useAppDispatch()
-
-  const currentLanguage = languages.find((item) => item.code === locale)
-  const localeTitle = currentLanguage?.nativeName ?? currentLanguage?.name ?? locale
+  const router = useRouter()
 
   const items: MenuProps['items'] = languages.map((item) => ({
     key: item.code,
-    label: item.flag
-      ? `${item.flag} ${item.nativeName ?? item.name}`
-      : (item.nativeName ?? item.name),
+    label: item.nativeName,
   }))
+
+  const handleMenuClick: MenuProps['onClick'] = ({ key }) => {
+    // Determine the short locale string, e.g., 'en-US' -> 'en', 'zh-CN' -> 'zh'
+    const locale = key.split('-')[0]
+    // Set cookie that our src/i18n/request.ts reads
+    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000`
+    // Refresh to apply new language
+    router.refresh()
+  }
 
   return (
     <Dropdown
       menu={{
         items,
         selectable: true,
-        selectedKeys: [locale],
-        onClick: ({ key }) => dispatch(setLocale(key as LocaleType)),
+        onClick: handleMenuClick,
       }}
+      trigger={['hover']}
+      placement="bottom"
     >
-      <ActionBlock title={localeTitle}>
+      <ActionBlock>
         <Icon iconName="layout-languages" size={16} />
       </ActionBlock>
     </Dropdown>

@@ -7,6 +7,7 @@ import type { MenuProps } from 'antd'
 import type { ItemType, MenuItemType } from 'antd/es/menu/interface'
 import Icon from '@/Icon'
 import { menuConfig } from '@/config/menu'
+import { useI18n } from '@I18n'
 
 const getOpenKeysFromPath = (path: string) => {
   const parts = path.split('/').filter(Boolean)
@@ -31,13 +32,16 @@ const resolveSelectedKey = (path: string, keys: Set<string>) => {
   return ''
 }
 
-const toMenuItems = (items: MenuItem[]): ItemType<MenuItemType>[] =>
-  items.map((item) => ({
-    key: item.key,
-    label: item.title,
-    icon: <Icon iconName={item.icon ?? 'menus/hello'} size={18} />,
-    children: item.children?.length ? toMenuItems(item.children) : undefined,
-  }))
+const toMenuItems = (items: MenuItem[], t: (key: string) => string): ItemType<MenuItemType>[] =>
+  items.map((item) => {
+    const label = t(item.title) || item.title
+    return {
+      key: item.key,
+      label,
+      icon: <Icon iconName={item.icon ?? 'menus/hello'} size={18} />,
+      children: item.children?.length ? toMenuItems(item.children, t) : undefined,
+    }
+  })
 
 interface MenuPropsExt {
   onNavigate?: () => void
@@ -46,8 +50,9 @@ interface MenuPropsExt {
 export default function Menu({ onNavigate }: MenuPropsExt) {
   const router = useRouter()
   const pathname = usePathname()
+  const { t } = useI18n()
   const [openKeys, setOpenKeys] = useState<string[]>([])
-  const items = useMemo(() => toMenuItems(menuConfig), [])
+  const items = useMemo(() => toMenuItems(menuConfig, t), [t])
   const keySet = useMemo(() => collectKeys(menuConfig), [])
   const selectedKey = useMemo(() => resolveSelectedKey(pathname, keySet), [pathname, keySet])
 

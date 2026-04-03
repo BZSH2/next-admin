@@ -1,8 +1,8 @@
 import { definePageMeta } from '@/utils/meta'
 import Icon from '@/Icon'
 
-export const { pageMeta, metadata } = definePageMeta({
-  title: '工作台',
+export const { pageMeta, metadata, generateMetadata } = definePageMeta({
+  title: '首页',
   icon: 'menus/goldenRetriever',
   sort: 1,
   description: '系统数据大盘与快捷操作',

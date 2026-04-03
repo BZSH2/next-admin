@@ -1,22 +1,4 @@
-export const localeCodes = [
-  'zh-CN',
-  'en-US',
-  'ja-JP',
-  'ko-KR',
-  'fr-FR',
-  'de-DE',
-  'es-ES',
-  'pt-BR',
-  'ru-RU',
-] as const
-
-export type LocaleCode = (typeof localeCodes)[number]
-
-type AppLanguage = Locale.Language & {
-  code: LocaleCode
-}
-
-export const languages: AppLanguage[] = [
+export const languages: Locale.Language[] = [
   {
     code: 'zh-CN',
     name: '中文',
@@ -99,14 +81,3 @@ export const languages: AppLanguage[] = [
     translateCode: 'ru',
   },
 ]
-
-export const defaultLocale: LocaleCode = 'zh-CN'
-
-export const localeOptions = languages.map((item) => ({
-  label: item.flag
-    ? `${item.flag} ${item.nativeName ?? item.name}`
-    : (item.nativeName ?? item.name),
-  value: item.code,
-}))
-
-export const localeCodeSet = new Set<LocaleCode>(languages.map((item) => item.code))

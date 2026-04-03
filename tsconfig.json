@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@I18n": ["./src/hooks/useI18n"]
     },
     "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true,

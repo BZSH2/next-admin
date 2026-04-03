@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 import '@/styles/index.scss'
 import ReduxProvider from '@/store/providers'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,17 +22,22 @@ export const metadata: Metadata = {
   icons: '/favicon.ico',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang="zh-CN" className="h-full">
+    <html lang={locale} className="h-full">
       <body className={`${geistSans.variable} ${geistMono.variable} h-full`}>
-        <ReduxProvider>
-          <AntdRegistry>{children}</AntdRegistry>
-        </ReduxProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ReduxProvider>
+            <AntdRegistry>{children}</AntdRegistry>
+          </ReduxProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )
