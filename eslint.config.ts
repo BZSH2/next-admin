@@ -18,16 +18,22 @@ const eslintConfig = defineConfig([
   ...nextTs,
   prettier,
   {
-    files: ['*.cjs', 'scripts/**/*.cjs'],
-    rules: {
-      '@typescript-eslint/no-require-imports': 'off',
-    },
-  },
-  {
+    files: ['**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}'],
     rules: {
       semi: ['error', 'never'],
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-debugger': 'error',
+      'no-console': ['error', { allow: ['warn', 'error'] }],
+      'no-alert': 'error',
+      eqeqeq: ['error', 'always', { null: 'ignore' }],
+      'no-var': 'error',
+      'prefer-const': [
+        'error',
+        {
+          destructuring: 'all',
+        },
+      ],
+      'object-shorthand': ['error', 'always'],
+      'no-useless-return': 'error',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -35,12 +41,44 @@ const eslintConfig = defineConfig([
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
           caughtErrorsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
         },
       ],
       'no-redeclare': 'off',
       '@typescript-eslint/no-redeclare': 'error',
       'no-shadow': 'off',
       '@typescript-eslint/no-shadow': 'error',
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          fixStyle: 'separate-type-imports',
+        },
+      ],
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        {
+          'ts-expect-error': 'allow-with-description',
+          'ts-ignore': true,
+          'ts-nocheck': true,
+          'ts-check': false,
+          minimumDescriptionLength: 6,
+        },
+      ],
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
+    files: ['*.cjs', 'scripts/**/*.cjs'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
+    files: ['scripts/**/*.{js,ts,mjs,cjs,mts,cts}'],
+    rules: {
+      'no-console': 'off',
+      'no-new-func': 'off',
     },
   },
   globalIgnores(eslintIgnorePatterns),

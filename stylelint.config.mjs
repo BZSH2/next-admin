@@ -5,6 +5,7 @@ const stylelintConfig = {
   ignoreFiles: [
     '.next/**',
     '.reports/**',
+    '.cache/**',
     'node_modules/**',
     'out/**',
     'build/**',

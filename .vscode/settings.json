@@ -78,5 +78,6 @@
     "webp",
     "zstd",
     "Русский"
-  ]
+  ],
+  "i18n-ally.localesPaths": ["src/i18n", "src/i18n/languages"]
 }

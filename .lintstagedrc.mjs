@@ -11,24 +11,12 @@ const toCliArgs = (filenames) =>
 
 const buildCommand = (baseCommand) => (filenames) => `${baseCommand} ${toCliArgs(filenames)}`
 
-const isTypeDeclarationFile = (filename) => filename.endsWith('.d.ts')
-const isConfigFile = (filename) => {
-  const normalizedFilename = filename.split(path.sep).join('/')
-  const basename = path.basename(filename)
-
-  return /\.(config|rc)\.[cm]?[jt]s$/i.test(normalizedFilename) || basename.startsWith('.')
-}
-
 const buildEslintCommand = (filenames) => {
-  const lintableFiles = filenames.filter(
-    (filename) => !isTypeDeclarationFile(filename) && !isConfigFile(filename)
-  )
-
-  if (lintableFiles.length === 0) {
+  if (filenames.length === 0) {
     return 'echo "No files for ESLint"'
   }
 
-  return `eslint --fix --max-warnings=0 ${toCliArgs(lintableFiles)}`
+  return `eslint --fix --max-warnings=0 --cache --cache-location .cache/eslint-staged --no-warn-ignored ${toCliArgs(filenames)}`
 }
 
 const lintStagedConfig = {

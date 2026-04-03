@@ -9,4 +9,26 @@
     ],
     "description": "Insert Icon with import",
   },
+  "Project useI18n Hook (No namespace)": {
+    "prefix": "useT",
+    "scope": "typescriptreact,javascriptreact,typescript,javascript",
+    "body": ["import { useI18n } from '@I18n'", "", "const { t } = useI18n()$0"],
+    "description": "Insert useI18n without namespace",
+  },
+  "Project useI18n Hook (With namespace)": {
+    "prefix": "useTn",
+    "scope": "typescriptreact,javascriptreact,typescript,javascript",
+    "body": ["import { useI18n } from '@I18n'", "", "const { t } = useI18n({ namespace: '$1' })$0"],
+    "description": "Insert useI18n with namespace",
+  },
+  "Next-Intl getTranslations (Server)": {
+    "prefix": "getT",
+    "scope": "typescriptreact,javascriptreact,typescript,javascript",
+    "body": [
+      "import { getTranslations } from 'next-intl/server'",
+      "",
+      "const t = await getTranslations('$1')$0",
+    ],
+    "description": "Quickly insert getTranslations for Server Components",
+  },
 }

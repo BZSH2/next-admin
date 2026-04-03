@@ -18,6 +18,7 @@
 /.next/
 /out/
 /.reports/
+/.cache/
 
 # production
 /build

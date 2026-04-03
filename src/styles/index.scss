@@ -11,3 +11,9 @@
 [class*='-container'] {
   height: 100%;
 }
+
+/* 禁用初始加载动画 避免刷新菜单抖动 */
+.preload * {
+  transition: none !important;
+  animation: none !important;
+}

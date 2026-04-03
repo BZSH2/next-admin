@@ -32,10 +32,10 @@ class MenuGenerator {
    * 核心执行方法：扫描、生成并写入文件
    */
   public execute() {
-    console.warn('🚀 开始扫描 app 目录生成菜单配置...')
+    console.log('🚀 开始扫描 app 目录生成菜单配置...')
     const menuTree = this.scanDirectory(this.appDir)
     this.writeToFile(menuTree)
-    console.warn(`✅ 菜单配置生成成功！已写入 ${path.relative(process.cwd(), this.outputFile)}`)
+    console.log(`✅ 菜单配置生成成功！已写入 ${path.relative(process.cwd(), this.outputFile)}`)
   }
 
   /**
