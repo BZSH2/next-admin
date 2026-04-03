@@ -1,13 +1,13 @@
 'use client'
 
-import { Drawer, Layout } from 'antd'
-import { useCallback } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setCollapsed } from '@/store/slices/uiSlice'
+import { Drawer, Layout } from 'antd'
+import { useCallback } from 'react'
 import { useLayoutMode } from '../../hooks/useLayoutMode'
+import Collapsed from './components/Collapsed'
 import Logo from './components/Logo'
 import Menu from './components/Menu'
-import Collapsed from './components/Collapsed'
 
 const { Sider } = Layout
 
@@ -24,7 +24,12 @@ export default function Sidebar() {
         size={220}
         open={mobileSidebarOpen}
         onClose={hideMobileSidebar}
-        styles={{ body: { padding: 0, background: '#ffffff' } }}
+        title={null}
+        closable={false}
+        styles={{
+          header: { display: 'none' },
+          body: { padding: 0, background: '#ffffff' },
+        }}
       >
         <div className="flex h-full flex-col">
           <Logo collapsed={false} />

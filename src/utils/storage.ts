@@ -1,3 +1,5 @@
+import { settingConfig } from '@/config/setting.config'
+
 /**
  * 类型安全的浏览器存储工具（LocalStorage / SessionStorage）
  *
@@ -11,7 +13,7 @@
  * getStorage('collapsed', 'session') // boolean | null
  * removeStorage('theme', 'local')
  */
-const PREFIX = ''
+const PREFIX = settingConfig.cacheKeyPrefix
 const isBrowser = typeof window !== 'undefined'
 
 /**

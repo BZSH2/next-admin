@@ -1,12 +1,19 @@
 'use client'
-import { Dropdown, type MenuProps } from 'antd'
 import { languages } from '@/config/locale.config'
-import ActionBlock from './ActionBlock'
 import Icon from '@/Icon'
+import { setCookie } from '@/utils'
+import { Dropdown, type MenuProps } from 'antd'
+import { useLocale } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import ActionBlock from './ActionBlock'
 
 export default function LocaleAction() {
   const router = useRouter()
+  const currentLocale = useLocale()
+  const currentShortLocale = currentLocale.split('-')[0]
+  const selectedLocaleCode =
+    languages.find((item) => item.code.split('-')[0] === currentShortLocale)?.code ??
+    languages[0]?.code
 
   const items: MenuProps['items'] = languages.map((item) => ({
     key: item.code,
@@ -14,11 +21,11 @@ export default function LocaleAction() {
   }))
 
   const handleMenuClick: MenuProps['onClick'] = ({ key }) => {
-    // Determine the short locale string, e.g., 'en-US' -> 'en', 'zh-CN' -> 'zh'
     const locale = key.split('-')[0]
-    // Set cookie that our src/i18n/request.ts reads
-    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000`
-    // Refresh to apply new language
+    setCookie('NEXT_LOCALE', locale as Cookie.Value<'NEXT_LOCALE'>, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365,
+    })
     router.refresh()
   }
 
@@ -27,6 +34,7 @@ export default function LocaleAction() {
       menu={{
         items,
         selectable: true,
+        selectedKeys: selectedLocaleCode ? [selectedLocaleCode] : [],
         onClick: handleMenuClick,
       }}
       trigger={['hover']}

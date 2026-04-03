@@ -1,9 +1,10 @@
-# useI18n 使用规范
+# 全自动化国际化体系（useI18n + Locale Pipeline）
 
 ## 目标
 
 - 统一项目内国际化调用入口，避免每个组件各自处理缺失文案异常。
 - 约束翻译函数的获取方式，保持 Hook 调用规则一致。
+- 构建“提取 -> 翻译补全 -> 运行时加载 -> UI 同步”的全自动化闭环。
 
 ## 目录结构与语言加载
 
@@ -11,6 +12,14 @@
 - 短码规则：`zh-CN -> zh`、`en-US -> en`、`ja-JP -> ja` 等（文件名为短码）
 - 服务端加载：`src/i18n/request.ts` 读取 `NEXT_LOCALE` Cookie（短码）并加载对应的 `*.json`
 - 语言配置：`src/config/locale.config.ts` 声明 BCP47 代码与翻译短码映射（`translateCode`）
+
+## 全自动化流水线
+
+1. 业务开发时在组件中直接写 `t('文案')` 或声明 `definePageMeta`。
+2. 执行 `pnpm openI18n` 自动扫描源码并补齐多语言包缺失项。
+3. 客户端切换语言后写入 `NEXT_LOCALE` 并 `router.refresh()`。
+4. 服务端在请求阶段读取 cookie 并动态加载对应语言包。
+5. 菜单、标签页、metadata 在同一轮刷新中统一切换语言表现。
 
 ## 统一导入方式
 
@@ -71,6 +80,12 @@ const strictText = t('menu.logout', true)
   - 根据 `src/types/locale.d.ts` 的 `Locale.Code` 生成/补全 `src/i18n/languages/*.json`
   - 仅补缺，不覆盖已有翻译；过滤包含 `.` 的非法键（`next-intl` 将 `.` 视为命名空间分隔符）
   - 非中文语言使用 Google 公共接口进行机器翻译，失败时回退原文；控制台仅输出统计信息
+
+## 语言切换与选中态同步
+
+- 语言切换入口：`src/components/Layouts/components/MainHeader/components/Locale.tsx`
+- 切换动作：写入 `NEXT_LOCALE` + `router.refresh()`，确保服务端与客户端同一语种
+- 当前项高亮：通过 `useLocale()` 计算 `selectedKeys`，下拉菜单始终选中当前语种
 
 ## 最佳实践
 
