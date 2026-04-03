@@ -1,7 +1,6 @@
 'use client'
 
-import { Layout } from 'antd'
-import { Drawer } from 'antd'
+import { Drawer, Layout } from 'antd'
 import { useCallback } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setCollapsed } from '@/store/slices/uiSlice'

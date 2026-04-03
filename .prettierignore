@@ -6,6 +6,7 @@
 build
 coverage
 src/types/next-env.d.ts
+next-env.d.ts
 node_modules
 out
 pnpm-lock.yaml
