@@ -35,7 +35,9 @@ export default function Layouts({ children }: { children: React.ReactNode }) {
         <MainHeader />
 
         <div className="p-10px flex-1 overflow-x-hidden overflow-y-auto">
-          <div className="min-h-full rounded-md border border-slate-200 bg-white">{children}</div>
+          <div className="h-full min-h-full rounded-md border border-slate-200 bg-white">
+            {children}
+          </div>
         </div>
       </main>
     </div>
