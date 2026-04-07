@@ -34,10 +34,8 @@ export default function Layouts({ children }: { children: React.ReactNode }) {
       <main className="relative flex h-screen flex-1 flex-col overflow-hidden">
         <MainHeader />
 
-        <div className="flex-1 overflow-x-hidden overflow-y-auto p-4">
-          <div className="min-h-full rounded-md border border-slate-200 bg-white p-4">
-            {children}
-          </div>
+        <div className="p-10px flex-1 overflow-x-hidden overflow-y-auto">
+          <div className="min-h-full rounded-md border border-slate-200 bg-white">{children}</div>
         </div>
       </main>
     </div>

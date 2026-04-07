@@ -141,7 +141,7 @@ class MenuGenerator {
     const fileContent = `// 此文件由 scripts/generateMenu/index.ts 自动生成
 // 请勿手动修改！如需更改菜单，请在对应的 app 目录下修改 page.tsx 中的 definePageMeta。
 
-export const menuConfig: MenuItem[] = ${menuString};
+export const menuConfig: MenuItem[] = ${menuString}
 `
 
     fs.writeFileSync(this.outputFile, fileContent, 'utf-8')

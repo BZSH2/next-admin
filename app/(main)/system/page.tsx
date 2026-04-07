@@ -5,7 +5,7 @@ import { definePageMeta } from '@/utils/meta'
 export const { pageMeta, metadata, generateMetadata } = definePageMeta({
   title: '系统管理',
   icon: 'menus/borderCollie',
-  sort: 99,
+  sort: 2,
   redirect: '/system/user', // 约定：点击系统管理时，默认重定向到用户管理
 })
 

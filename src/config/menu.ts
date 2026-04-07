@@ -12,7 +12,7 @@ export const menuConfig: MenuItem[] = [
   {
     key: '/system',
     title: '系统管理',
-    sort: 99,
+    sort: 2,
     icon: 'menus/borderCollie',
     redirect: '/system/user',
     children: [
@@ -20,16 +20,21 @@ export const menuConfig: MenuItem[] = [
         key: '/system/user',
         title: '用户管理',
         sort: 1,
-        icon: 'menus/corgi',
         description: '系统账号与用户信息管理',
       },
       {
         key: '/system/role',
         title: '角色管理',
         sort: 2,
-        icon: 'menus/blackCat',
         description: '系统角色与权限分配管理',
       },
     ],
+  },
+  {
+    key: '/process',
+    title: '流程',
+    sort: 3,
+    icon: 'menus/blackCat',
+    description: '流程图',
   },
 ]
