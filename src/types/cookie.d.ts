@@ -1,11 +1,7 @@
 declare global {
   namespace Cookie {
-    type ExtractShortCode<T extends string> = T extends `${infer S}-${string}` ? S : T
-
-    type LocaleCode = ExtractShortCode<Locale.Code>
-
     interface Schema {
-      NEXT_LOCALE: LocaleCode
+      NEXT_LOCALE: Locale.Code
     }
 
     type Key = keyof Schema

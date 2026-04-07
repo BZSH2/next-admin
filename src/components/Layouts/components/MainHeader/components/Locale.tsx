@@ -10,10 +10,8 @@ import ActionBlock from './ActionBlock'
 export default function LocaleAction() {
   const router = useRouter()
   const currentLocale = useLocale()
-  const currentShortLocale = currentLocale.split('-')[0]
   const selectedLocaleCode =
-    languages.find((item) => item.code.split('-')[0] === currentShortLocale)?.code ??
-    languages[0]?.code
+    languages.find((item) => item.code === currentLocale)?.code ?? languages[0]?.code
 
   const items: MenuProps['items'] = languages.map((item) => ({
     key: item.code,
@@ -21,7 +19,8 @@ export default function LocaleAction() {
   }))
 
   const handleMenuClick: MenuProps['onClick'] = ({ key }) => {
-    const locale = key.split('-')[0]
+    const locale = languages.find((item) => item.code === key)?.code
+    if (!locale) return
     setCookie('NEXT_LOCALE', locale as Cookie.Value<'NEXT_LOCALE'>, {
       path: '/',
       maxAge: 60 * 60 * 24 * 365,

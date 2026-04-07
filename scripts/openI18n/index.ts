@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { isChineseLocale, toTranslateLocale, translateText } from './translator'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -143,21 +144,10 @@ class OpenI18n {
   }
 
   /**
-   * 语言文件名映射：zh-CN -> zh, en-US -> en
+   * 语言文件名映射：使用完整 locale code
    */
   private toFileLocale(code: string) {
-    return code.split('-')[0]?.toLowerCase() || code.toLowerCase()
-  }
-
-  /**
-   * 翻译服务目标语言映射：优先保留语种，中文保留地区
-   * 例如：zh-CN -> zh-CN, pt-BR -> pt
-   */
-  private toTranslateLocale(code: string) {
-    const [lang, region] = code.split('-')
-    if (!lang) return 'en'
-    if (lang.toLowerCase() === 'zh' && region) return `zh-${region.toUpperCase()}`
-    return lang.toLowerCase()
+    return code
   }
 
   private readLocaleJson(filePath: string) {
@@ -192,7 +182,7 @@ class OpenI18n {
       if (!localeMap.has(fileLocale)) {
         localeMap.set(fileLocale, {
           code: fileLocale,
-          translate: this.toTranslateLocale(code),
+          translate: toTranslateLocale(code),
         })
       }
     }
@@ -214,10 +204,10 @@ class OpenI18n {
       }
       for (const key of validKeys) {
         if (current[key] !== undefined) continue
-        if (locale.code === 'zh') {
+        if (isChineseLocale(locale.code)) {
           current[key] = key
         } else {
-          current[key] = await this.translateText(key, locale.translate)
+          current[key] = await translateText(key, locale.translate)
         }
         changed = true
         totalAdded += 1
@@ -231,37 +221,6 @@ class OpenI18n {
       }
     }
     return { localesUpdated, totalAdded, totalCleaned }
-  }
-
-  /**
-   * 使用 Google 公共接口进行机器翻译
-   * 网络异常或响应异常时回退原文，保证脚本可持续执行
-   */
-  private async translateText(text: string, target: string) {
-    const query = new URLSearchParams({
-      client: 'gtx',
-      sl: 'auto',
-      tl: target,
-      dt: 't',
-      q: text,
-    }).toString()
-    const url = `https://translate.googleapis.com/translate_a/single?${query}`
-    try {
-      const res = await fetch(url)
-      if (!res.ok) return text
-      const data = (await res.json()) as unknown
-      if (!Array.isArray(data)) return text
-      const sentences = data[0]
-      if (!Array.isArray(sentences)) return text
-      const translated = sentences
-        .map((item) => (Array.isArray(item) ? item[0] : ''))
-        .filter((part): part is string => typeof part === 'string')
-        .join('')
-        .trim()
-      return translated || text
-    } catch {
-      return text
-    }
   }
 }
 
